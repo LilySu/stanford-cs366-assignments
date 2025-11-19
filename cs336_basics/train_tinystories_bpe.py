@@ -1,26 +1,65 @@
 #!/usr/bin/env python3
 """
-Train a BPE tokenizer on the TinyStories dataset.
+Train a BPE tokenizer on the TinyStories or OpenWebText dataset.
 """
 import time
 import pickle
 import sys
+import argparse
 from pathlib import Path
 from bpe import train_bpe
 
 def main():
-    # Path to TinyStories dataset - use the full training set
-    input_path = Path("data/TinyStoriesV2-GPT4-train.txt")
+    parser = argparse.ArgumentParser(description="Train a BPE tokenizer on TinyStories or OpenWebText")
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        choices=["tinystories", "openwebtext", "owt"],
+        default="tinystories",
+        help="Dataset to train on: 'tinystories' or 'openwebtext'/'owt' (default: tinystories)"
+    )
+    parser.add_argument(
+        "--vocab-size",
+        type=int,
+        default=None,
+        help="Maximum vocabulary size (default: 10000 for TinyStories, 32000 for OpenWebText)"
+    )
+    parser.add_argument(
+        "--output-prefix",
+        type=str,
+        default=None,
+        help="Prefix for output files (default: dataset name)"
+    )
+
+    args = parser.parse_args()
+
+    # Normalize dataset name
+    dataset = args.dataset
+    if dataset == "owt":
+        dataset = "openwebtext"
+
+    # Set default paths and vocab size based on dataset
+    if dataset == "tinystories":
+        input_path = Path("data/TinyStoriesV2-GPT4-train.txt")
+        default_vocab_size = 10000
+        default_prefix = "tinystories"
+    else:  # openwebtext
+        input_path = Path("data/owt_train.txt")
+        default_vocab_size = 32000
+        default_prefix = "openwebtext"
+
+    vocab_size = args.vocab_size if args.vocab_size is not None else default_vocab_size
+    output_prefix = args.output_prefix if args.output_prefix is not None else default_prefix
 
     if not input_path.exists():
         print(f"Error: {input_path} does not exist")
-        print("Please make sure the TinyStories training dataset exists at data/TinyStoriesV2-GPT4-train.txt")
+        print(f"Please make sure the dataset exists at {input_path}")
         sys.exit(1)
 
-    vocab_size = 10000
     special_tokens = ["<|endoftext|>"]
 
-    print(f"Training BPE tokenizer on {input_path}")
+    print(f"Training BPE tokenizer on {dataset.upper()} dataset")
+    print(f"Input file: {input_path}")
     print(f"Vocabulary size: {vocab_size}")
     print(f"Special tokens: {special_tokens}")
     print()
@@ -50,8 +89,8 @@ def main():
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
 
-    vocab_path = output_dir / "tinystories_vocab.pkl"
-    merges_path = output_dir / "tinystories_merges.pkl"
+    vocab_path = output_dir / f"{output_prefix}_vocab.pkl"
+    merges_path = output_dir / f"{output_prefix}_merges.pkl"
 
     with open(vocab_path, 'wb') as f:
         pickle.dump(vocab, f)

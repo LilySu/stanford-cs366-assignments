@@ -48,3 +48,18 @@ gunzip owt_valid.txt.gz
 cd ..
 ```
 
+### Usage examples:
+#### Train on TinyStories (default, vocab size 10000)
+```python cs336_basics/train_tinystories_bpe.py```
+
+#### Train on OpenWebText with vocab size 32000
+```python cs336_basics/train_tinystories_bpe.py --dataset openwebtext```
+
+#### Or use the shorthand
+```python cs336_basics/train_tinystories_bpe.py --dataset owt```
+
+#### Custom vocab size for OpenWebText
+```python cs336_basics/train_tinystories_bpe.py --dataset owt --vocab-size 50000```
+
+#### Custom output prefix
+```python cs336_basics/train_tinystories_bpe.py --dataset owt --output-prefix owt_32k```
