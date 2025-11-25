@@ -17,7 +17,8 @@ from cs336_basics.bpe.tokenizer import Tokenizer
 from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
     SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
-    TransformerLM, compute_cross_entropy_loss, AdamW)
+    TransformerLM, compute_cross_entropy_loss, AdamW,
+    learning_rate_schedule)
 
 
 def run_linear(
@@ -713,7 +714,13 @@ def run_get_lr_cosine_schedule(
     Returns:
         Learning rate at the given iteration under the specified schedule.
     """
-    raise NotImplementedError
+    return learning_rate_schedule(
+            it=it,
+            max_learning_rate=max_learning_rate,
+            min_learning_rate=min_learning_rate,
+            warmup_iters=warmup_iters,
+            cosine_cycle_iters=cosine_cycle_iters
+        )
 
 
 def run_save_checkpoint(

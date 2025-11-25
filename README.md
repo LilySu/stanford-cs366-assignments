@@ -108,3 +108,6 @@ cd ..
 
 #### AdamW Test
 ```uv run pytest -k test_adamw```
+
+#### Cosine Learning Rate Test
+```uv run pytest -k test_get_lr_cosine_schedule```
