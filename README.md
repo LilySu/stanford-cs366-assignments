@@ -91,5 +91,8 @@ cd ..
 #### Softmax Test
 ```uv run pytest -k test_softmax_matches_pytorch```
 
-#### Softmax Test
+#### Scaled Dot Attention with Boolean Mask Test
 ```uv run pytest -k test_4d_scaled_dot_product_attention```
+
+#### Causal Masking With Rope Test
+```uv run pytest -k test_multihead_self_attention_with_rope```
