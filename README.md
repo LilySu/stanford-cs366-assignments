@@ -105,3 +105,6 @@ cd ..
 
 #### Cross Entropy Test
 ```uv run pytest -k test_cross_entropy```
+
+#### AdamW Test
+```uv run pytest -k test_adamw```
