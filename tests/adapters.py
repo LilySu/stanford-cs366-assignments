@@ -17,7 +17,7 @@ from cs336_basics.bpe.tokenizer import Tokenizer
 from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
     SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
-    TransformerLM)
+    TransformerLM, compute_cross_entropy_loss)
 
 
 def run_linear(
@@ -122,33 +122,16 @@ def run_swiglu(
     Returns:
         Float[Tensor, "... d_model"]: Output embeddings of the same shape as the input embeddings.
     """
-
-    # 1. Initialize your module
-    # We don't pass d_ff here because your class calculates it internally based on d_model.
-    # However, for the test to work, your internal calculation MUST match the d_ff passed 
-    # by the test. If the test passes a specific d_ff that isn't exactly 8/3 rounded, 
-    # we might need to manually override the shapes, but usually, the test respects the formula.
-    # For safety in this specific "run_ function", we can manually patch the linear layers 
-    # to match the d_ff provided by the test arguments.
-    
-    module = SwiGLU(d_model)
-    
-    # Force the linear layers to match the test dimensions exactly
-    # just in case the test uses a specific d_ff different from the 8/3 formula.
-    module.w1 = Linear(d_model, d_ff)
-    module.w2 = Linear(d_ff, d_model)
-    module.w3 = Linear(d_model, d_ff)
-
-    # 2. Load the weights
-    # Your Linear class uses shape (in, out). 
-    # The inputs are (out, in). We must transpose (.T) them.
+    module = SwiGLU(d_model, device=in_features.device, dtype=in_features.dtype)
+    # Patch internal layers to match specific test dimensions
+    module.w1 = Linear(d_model, d_ff, device=in_features.device, dtype=in_features.dtype)
+    module.w2 = Linear(d_ff, d_model, device=in_features.device, dtype=in_features.dtype)
+    module.w3 = Linear(d_model, d_ff, device=in_features.device, dtype=in_features.dtype)
     
     with torch.no_grad():
         module.w1.W.copy_(w1_weight.T)
         module.w2.W.copy_(w2_weight.T)
         module.w3.W.copy_(w3_weight.T)
-
-    # 3. Run forward pass
     return module(in_features)
 
 
@@ -170,8 +153,7 @@ def run_scaled_dot_product_attention(
     Returns:
         Float[Tensor, " ... queries d_v"]: Output of SDPA
     """
-    with torch.inference_mode():
-        return scaled_dot_product_attention(Q, K, V, mask)
+    return scaled_dot_product_attention(Q, K, V, mask)
 
 
 def run_multihead_self_attention(
@@ -206,7 +188,7 @@ def run_multihead_self_attention(
         implementation with the given QKV projection weights and input features.
     """
     # 1. Initialize Module
-    mhsa = MultiHeadSelfAttention(d_model, num_heads, device=in_features.device)
+    mhsa = MultiHeadSelfAttention(d_model, num_heads, device=in_features.device, dtype=in_features.dtype)
     
     # 2. Load Weights
     # The test weights are likely shape (Out, In) (Standard PyTorch).
@@ -273,7 +255,7 @@ def run_multihead_self_attention_with_rope(
     )
 
     # 2. Initialize Multi-Head Attention
-    mhsa = MultiHeadSelfAttention(d_model, num_heads, device=device)
+    mhsa = MultiHeadSelfAttention(d_model, num_heads, device=device, dtype=in_features.dtype)
 
     # 3. Load Weights
     # Transpose (.T) because your Linear class uses (in, out) but weights are (out, in).
@@ -287,7 +269,7 @@ def run_multihead_self_attention_with_rope(
     # If positions are not provided, default to a simple 0..seq_len range.
     if token_positions is None:
         seq_len = in_features.shape[-2]
-        token_positions = torch.arange(seq_len, device=device)
+        token_positions = torch.arange(seq_len, device=device).expand(in_features.shape[:-1])
         # If input is batched, we might need to expand this, but standard broadcasting usually handles 1D pos indices.
         # However, to be safe with our unsqueeze fix above, let's ensure it matches batch dims if needed.
         # For this test, token_positions IS provided, so this block is just a fallback.
@@ -583,25 +565,27 @@ def run_rmsnorm(
     """Given the weights of a RMSNorm affine transform,
     return the output of running RMSNorm on the input features.
     """
-    # 1. Upcast input to float32 to prevent overflow/underflow when squaring
-    x_fp32 = in_features.to(torch.float32)
+    # # 1. Upcast input to float32 to prevent overflow/underflow when squaring
+    # x_fp32 = in_features.to(torch.float32)
 
-    # 2. Calculate sum of squares / d_model (The Mean of Squares)
-    # We calculate across the last dimension (d_model).
-    # keepdim=True is essential to allow broadcasting the division later.
-    squared_mean = x_fp32.pow(2).mean(dim=-1, keepdim=True)
+    # # 2. Calculate sum of squares / d_model (The Mean of Squares)
+    # # We calculate across the last dimension (d_model).
+    # # keepdim=True is essential to allow broadcasting the division later.
+    # squared_mean = x_fp32.pow(2).mean(dim=-1, keepdim=True)
 
-    # 3. Calculate RMS (add epsilon for stability then sqrt)
-    rms = torch.sqrt(squared_mean + eps)
+    # # 3. Calculate RMS (add epsilon for stability then sqrt)
+    # rms = torch.sqrt(squared_mean + eps)
 
-    # 4. Normalize the input
-    normalized = x_fp32 / rms
+    # # 4. Normalize the input
+    # normalized = x_fp32 / rms
 
-    # 5. Downcast back to original dtype and scale by the learnable weights.
-    # PyTorch handles the broadcasting of 'weights' (shape: d_model) 
-    # against 'normalized' (shape: ... d_model) automatically.
-    return normalized.to(in_features.dtype) * weights
-
+    # # 5. Downcast back to original dtype and scale by the learnable weights.
+    # # PyTorch handles the broadcasting of 'weights' (shape: d_model) 
+    # # against 'normalized' (shape: ... d_model) automatically.
+    # return normalized.to(in_features.dtype) * weights
+    rmsnorm = RMSNorm(d_model, eps, device=in_features.device, dtype=in_features.dtype)
+    rmsnorm.weight = nn.Parameter(weights)
+    return rmsnorm(in_features)
 
 def run_silu(in_features: Float[Tensor, " ..."]) -> Float[Tensor, " ..."]:
     """Given a tensor of inputs, return the output of applying SiLU
@@ -614,7 +598,7 @@ def run_silu(in_features: Float[Tensor, " ..."]) -> Float[Tensor, " ..."]:
         Float[Tensor,"..."]: of with the same shape as `in_features` with the output of applying
         SiLU to each element.
     """
-    raise NotImplementedError
+    return F.silu(in_features)
 
 
 def run_get_batch(
@@ -637,7 +621,15 @@ def run_get_batch(
         is the sampled input sequences, and the second tuple item is the corresponding
         language modeling labels.
     """
-    raise NotImplementedError
+    # We need to sample `batch_size` starting indices.
+    # The last valid starting index is len(dataset) - context_length - 1 (for the label).
+    high = len(dataset) - context_length
+    ix = torch.randint(low=0, high=high, size=(batch_size,))
+    
+    x = torch.stack([torch.from_numpy((dataset[i : i + context_length]).astype(np.int64)) for i in ix])
+    y = torch.stack([torch.from_numpy((dataset[i + 1 : i + 1 + context_length]).astype(np.int64)) for i in ix])
+    
+    return x.to(device), y.to(device)
 
 
 def run_softmax(in_features: Float[Tensor, " ..."], dim: int) -> Float[Tensor, " ..."]:
@@ -671,7 +663,11 @@ def run_cross_entropy(
     Returns:
         Float[Tensor, ""]: The average cross-entropy loss across examples.
     """
-    raise NotImplementedError
+    # Compute element-wise loss
+    element_losses = compute_cross_entropy_loss(inputs, targets)
+    
+    # Return the average
+    return element_losses.mean()
 
 
 def run_gradient_clipping(parameters: Iterable[torch.nn.Parameter], max_l2_norm: float) -> None:

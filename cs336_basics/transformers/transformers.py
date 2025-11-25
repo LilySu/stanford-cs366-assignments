@@ -5,6 +5,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as init
 
+from torch import Tensor
+from jaxtyping import Float, Int
+
 
 class Linear(nn.Module):
     def __init__(self, in_features, out_features, device=None, dtype=None):
@@ -346,35 +349,22 @@ class MultiHeadSelfAttention(nn.Module):
         # 3. Apply RoPE (if provided)
         # RoPE applies to Q and K
         if rope_module is not None and token_positions is not None:
-            # FIX: Reshape token_positions for broadcasting over heads.
-            # token_positions is (Batch, Seq). We need (Batch, 1, Seq).
-            # This ensures RoPE output is (Batch, 1, Seq, Dim), which broadcasts to (Batch, Heads, Seq, Dim).
-            if token_positions.ndim == 2: 
-                rope_positions = token_positions.unsqueeze(1)
-            else:
-                rope_positions = token_positions
-                
-            q = rope_module(q, rope_positions)
-            k = rope_module(k, rope_positions)
+            # RoPE handles broadcasting internally now via unsqueeze check
+            q = rope_module(q, token_positions)
+            k = rope_module(k, token_positions)
 
-        # 4. Create Causal Mask
-        # We want a Lower Triangular mask (True = Attend, False = Ignore)
-        # shape (Seq, Seq)
+        # Causal Mask (Lower Triangular)
         mask = torch.tril(torch.ones((seq_len, seq_len), device=x.device, dtype=torch.bool))
+        
+        attn_out = scaled_dot_product_attention(q, k, v, mask=mask)
         
         # 5. Scaled Dot-Product Attention
         # Output shape: (Batch, Num_Heads, Seq, Head_Dim)
-        attn_out = scaled_dot_product_attention(q, k, v, mask=mask)
-        
-        # 6. Recombine Heads
-        # Transpose back: (Batch, Seq, Num_Heads, Head_Dim)
-        attn_out = attn_out.transpose(1, 2)
-        # Flatten: (Batch, Seq, d_model)
+        # Recombine: (Batch, Heads, Seq, Dim) -> (Batch, Seq, Heads, Dim) -> (Batch, Seq, d_model)
+        attn_out = attn_out.transpose(1, 2).contiguous()
         attn_out = attn_out.reshape(batch_size, seq_len, self.d_model)
         
-        # 7. Output Projection
         return self.o_proj(attn_out)
-
 
 class TransformerBlock(nn.Module):
     def __init__(
@@ -389,66 +379,39 @@ class TransformerBlock(nn.Module):
     ):
         super().__init__()
         self.d_model = d_model
-        self.num_heads = num_heads
-        self.d_ff = d_ff
-        
-        # 1. Layer Norms
         self.ln1 = RMSNorm(d_model, device=device, dtype=dtype)
+        self.attn = MultiHeadSelfAttention(d_model, num_heads, device=device, dtype=dtype)
         self.ln2 = RMSNorm(d_model, device=device, dtype=dtype)
         
-        # 2. Multi-Head Self Attention
-        self.attn = MultiHeadSelfAttention(d_model, num_heads, device=device, dtype=dtype)
-        
-        # 3. Position-wise Feed-Forward Network (SwiGLU variant)
-        # Note: We implement this manually here because the provided SwiGLU class 
-        # calculates its own d_ff, but this block must accept an external d_ff.
+        # SwiGLU components manually instantiated to allow external d_ff control
         self.ffn_w1 = Linear(d_model, d_ff, device=device, dtype=dtype) # Gate
         self.ffn_w2 = Linear(d_ff, d_model, device=device, dtype=dtype) # Down
         self.ffn_w3 = Linear(d_model, d_ff, device=device, dtype=dtype) # Up
         
-        # 4. RoPE
-        # Head dimension for RoPE
         d_head = d_model // num_heads
         self.rope = RotaryPositionalEmbedding(theta, d_head, max_seq_len, device=device)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Args:
-            x: Input tensor of shape (Batch, Seq, d_model)
-        """
         batch_size, seq_len, _ = x.shape
-        
-        # Create position indices for RoPE: (Batch, Seq)
-        # We assume standard 0..N positions.
         positions = torch.arange(seq_len, device=x.device).unsqueeze(0).expand(batch_size, seq_len)
         
-        # --- Sublayer 1: Attention ---
-        # Relation: y = x + MHSA(RMSNorm(x))
+        # Attention Sublayer
         resid = x
         x = self.ln1(x)
-        
-        # Apply Attention with RoPE
         x = self.attn(x, rope_module=self.rope, token_positions=positions)
-        
-        # Residual Connection
         x = x + resid
         
-        # --- Sublayer 2: Feed Forward (SwiGLU) ---
-        # Relation: y = x + FFN(RMSNorm(x))
+        # FFN Sublayer (SwiGLU)
         resid = x
         x = self.ln2(x)
         
-        # FFN: SwiGLU Logic
-        # gate = w1(x), up = w3(x), out = w2(F.silu(gate) * up)
         gate = self.ffn_w1(x)
         up = self.ffn_w3(x)
         act = F.silu(gate)
         h = act * up
         x = self.ffn_w2(h)
         
-        # Residual Connection
         x = x + resid
-        
         return x
 
 
@@ -514,3 +477,41 @@ class TransformerLM(nn.Module):
         logits = self.lm_head(x)
         
         return logits
+
+
+def compute_cross_entropy_loss(
+    logits: Float[Tensor, "... vocab_size"], 
+    targets: Int[Tensor, "..."]
+) -> Float[Tensor, "..."]:
+    """
+    Computes the cross entropy loss for each element in the batch.
+    
+    Formula:
+    Loss = -log(softmax(x)[class])
+         = -log(exp(x[class]) / sum(exp(x[j])))
+         = -x[class] + log(sum(exp(x[j])))
+         
+    For numerical stability, we use the Log-Sum-Exp trick:
+    log(sum(exp(x[j]))) = m + log(sum(exp(x[j] - m)))
+    where m = max(x).
+    """
+    # 1. Find the maximum value for numerical stability (m)
+    # keepdim=True ensures shape remains (... , 1) for broadcasting
+    m = logits.max(dim=-1, keepdim=True).values
+
+    # 2. Compute Log-Sum-Exp with stability trick
+    # exp(logits - m) prevents overflow
+    # sum over the vocabulary dimension (last dimension)
+    sum_exp = (logits - m).exp().sum(dim=-1, keepdim=True)
+    log_sum_exp = m + sum_exp.log()
+
+    # 3. Extract the logits corresponding to the correct targets (x[class])
+    # We need to gather the specific logit for the target class at each position.
+    # targets shape: (...) -> unsqueeze to (..., 1) to match gather dim
+    gathered_logits = logits.gather(dim=-1, index=targets.unsqueeze(-1))
+    
+    # 4. Final Calculation: log_sum_exp - target_logit
+    # We squeeze the last dimension to match the original target shape (...)
+    loss = log_sum_exp - gathered_logits
+    
+    return loss.squeeze(-1)

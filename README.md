@@ -102,3 +102,6 @@ cd ..
 
 #### Implement the TransformerLM Test
 ```uv run pytest -k test_transformer_lm```
+
+#### Cross Entropy Test
+```uv run pytest -k test_cross_entropy```
