@@ -16,7 +16,8 @@ from torch import Tensor
 from cs336_basics.bpe.tokenizer import Tokenizer
 from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
-    SwiGLU, scaled_dot_product_attention, softmax)
+    SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
+    TransformerLM)
 
 
 def run_linear(
@@ -396,7 +397,45 @@ def run_transformer_block(
         Float[Tensor, "batch sequence_length d_model"] Tensor with the output of
         running the Transformer block on the input features while using RoPE.
     """
-    raise NotImplementedError
+    device = in_features.device
+    dtype = in_features.dtype
+
+    # 1. Initialize the Block
+    # Ensure you are using the TransformerBlock class defined in the previous step
+    block = TransformerBlock(
+        d_model=d_model,
+        num_heads=num_heads,
+        d_ff=d_ff,
+        max_seq_len=max_seq_len,
+        theta=theta,
+        device=device,
+        dtype=dtype
+    )
+    
+    # 2. Load Weights
+    with torch.no_grad():
+        # --- Attention Projections ---
+        # The state_dict weights are (Out, In).
+        # Your custom Linear class weights are (In, Out).
+        # We must transpose (.T) all Linear weights.
+        block.attn.q_proj.W.copy_(weights["attn.q_proj.weight"].T)
+        block.attn.k_proj.W.copy_(weights["attn.k_proj.weight"].T)
+        block.attn.v_proj.W.copy_(weights["attn.v_proj.weight"].T)
+        block.attn.o_proj.W.copy_(weights["attn.output_proj.weight"].T)
+        
+        # --- Norms ---
+        # 1D tensors, no transpose needed.
+        block.ln1.weight.copy_(weights["ln1.weight"])
+        block.ln2.weight.copy_(weights["ln2.weight"])
+        
+        # --- FFN (SwiGLU) ---
+        # Transpose here is what fixes the specific RuntimeError you saw.
+        block.ffn_w1.W.copy_(weights["ffn.w1.weight"].T) # Gate
+        block.ffn_w2.W.copy_(weights["ffn.w2.weight"].T) # Down
+        block.ffn_w3.W.copy_(weights["ffn.w3.weight"].T) # Up
+
+    # 3. Run Forward Pass
+    return block(in_features)
 
 
 def run_transformer_lm(
@@ -478,7 +517,61 @@ def run_transformer_lm(
         Float[Tensor, "batch_size sequence_length vocab_size"]: Tensor with the predicted unnormalized
         next-word distribution for each token.
     """
-    raise NotImplementedError
+    device = in_indices.device
+    # Note: in_indices is Int/Long, but the model weights might be float32/bfloat16.
+    # We infer the dtype from a weight in the dictionary to initialize the model correctly.
+    # If explicit dtype isn't easily available, float32 is a safe default for these tests.
+    dtype = weights["token_embeddings.weight"].dtype
+
+    # 1. Initialize the Model
+    model = TransformerLM(
+        vocab_size=vocab_size,
+        context_length=context_length,
+        d_model=d_model,
+        num_layers=num_layers,
+        num_heads=num_heads,
+        d_ff=d_ff,
+        rope_theta=rope_theta,
+        device=device,
+        dtype=dtype
+    )
+
+    # 2. Load Weights
+    with torch.no_grad():
+        # --- 2a. Global Embeddings & Head ---
+        
+        # Token Embeddings: No transpose needed (Vocab, Dim) matches.
+        model.token_embeddings.weight.copy_(weights["token_embeddings.weight"])
+        
+        # Final Norm: 1D tensor
+        model.ln_final.weight.copy_(weights["ln_final.weight"])
+        
+        # LM Head: Linear layer, NEEDS TRANSPOSE (.T)
+        # Provided: (Vocab, Dim) -> Custom Linear: (Dim, Vocab)
+        model.lm_head.W.copy_(weights["lm_head.weight"].T)
+
+        # --- 2b. Layer Loop ---
+        for i in range(num_layers):
+            prefix = f"layers.{i}."
+            block = model.layers[i]
+            
+            # Attention Linears (Transpose)
+            block.attn.q_proj.W.copy_(weights[f"{prefix}attn.q_proj.weight"].T)
+            block.attn.k_proj.W.copy_(weights[f"{prefix}attn.k_proj.weight"].T)
+            block.attn.v_proj.W.copy_(weights[f"{prefix}attn.v_proj.weight"].T)
+            block.attn.o_proj.W.copy_(weights[f"{prefix}attn.output_proj.weight"].T)
+            
+            # Layer Norms (No Transpose)
+            block.ln1.weight.copy_(weights[f"{prefix}ln1.weight"])
+            block.ln2.weight.copy_(weights[f"{prefix}ln2.weight"])
+            
+            # FFN Linears (Transpose)
+            block.ffn_w1.W.copy_(weights[f"{prefix}ffn.w1.weight"].T) # Gate
+            block.ffn_w2.W.copy_(weights[f"{prefix}ffn.w2.weight"].T) # Down
+            block.ffn_w3.W.copy_(weights[f"{prefix}ffn.w3.weight"].T) # Up
+
+    # 3. Run Forward Pass
+    return model(in_indices)
 
 
 def run_rmsnorm(

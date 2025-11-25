@@ -374,3 +374,143 @@ class MultiHeadSelfAttention(nn.Module):
         
         # 7. Output Projection
         return self.o_proj(attn_out)
+
+
+class TransformerBlock(nn.Module):
+    def __init__(
+        self, 
+        d_model: int, 
+        num_heads: int, 
+        d_ff: int, 
+        max_seq_len: int,
+        theta: float,
+        device=None, 
+        dtype=None
+    ):
+        super().__init__()
+        self.d_model = d_model
+        self.num_heads = num_heads
+        self.d_ff = d_ff
+        
+        # 1. Layer Norms
+        self.ln1 = RMSNorm(d_model, device=device, dtype=dtype)
+        self.ln2 = RMSNorm(d_model, device=device, dtype=dtype)
+        
+        # 2. Multi-Head Self Attention
+        self.attn = MultiHeadSelfAttention(d_model, num_heads, device=device, dtype=dtype)
+        
+        # 3. Position-wise Feed-Forward Network (SwiGLU variant)
+        # Note: We implement this manually here because the provided SwiGLU class 
+        # calculates its own d_ff, but this block must accept an external d_ff.
+        self.ffn_w1 = Linear(d_model, d_ff, device=device, dtype=dtype) # Gate
+        self.ffn_w2 = Linear(d_ff, d_model, device=device, dtype=dtype) # Down
+        self.ffn_w3 = Linear(d_model, d_ff, device=device, dtype=dtype) # Up
+        
+        # 4. RoPE
+        # Head dimension for RoPE
+        d_head = d_model // num_heads
+        self.rope = RotaryPositionalEmbedding(theta, d_head, max_seq_len, device=device)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Input tensor of shape (Batch, Seq, d_model)
+        """
+        batch_size, seq_len, _ = x.shape
+        
+        # Create position indices for RoPE: (Batch, Seq)
+        # We assume standard 0..N positions.
+        positions = torch.arange(seq_len, device=x.device).unsqueeze(0).expand(batch_size, seq_len)
+        
+        # --- Sublayer 1: Attention ---
+        # Relation: y = x + MHSA(RMSNorm(x))
+        resid = x
+        x = self.ln1(x)
+        
+        # Apply Attention with RoPE
+        x = self.attn(x, rope_module=self.rope, token_positions=positions)
+        
+        # Residual Connection
+        x = x + resid
+        
+        # --- Sublayer 2: Feed Forward (SwiGLU) ---
+        # Relation: y = x + FFN(RMSNorm(x))
+        resid = x
+        x = self.ln2(x)
+        
+        # FFN: SwiGLU Logic
+        # gate = w1(x), up = w3(x), out = w2(F.silu(gate) * up)
+        gate = self.ffn_w1(x)
+        up = self.ffn_w3(x)
+        act = F.silu(gate)
+        h = act * up
+        x = self.ffn_w2(h)
+        
+        # Residual Connection
+        x = x + resid
+        
+        return x
+
+
+class TransformerLM(nn.Module):
+    def __init__(
+        self,
+        vocab_size: int,
+        context_length: int,
+        d_model: int,
+        num_layers: int,
+        num_heads: int,
+        d_ff: int,
+        rope_theta: float,
+        device=None,
+        dtype=None,
+    ):
+        super().__init__()
+        self.d_model = d_model
+        
+        # 1. Token Embeddings
+        self.token_embeddings = Embedding(vocab_size, d_model, device=device, dtype=dtype)
+        
+        # 2. Transformer Blocks
+        # stored in a ModuleList so PyTorch can register parameters
+        self.layers = nn.ModuleList([
+            TransformerBlock(
+                d_model=d_model,
+                num_heads=num_heads,
+                d_ff=d_ff,
+                max_seq_len=context_length,
+                theta=rope_theta,
+                device=device,
+                dtype=dtype
+            )
+            for _ in range(num_layers)
+        ])
+        
+        # 3. Final RMSNorm
+        self.ln_final = RMSNorm(d_model, device=device, dtype=dtype)
+        
+        # 4. Language Model Head (Output Projection)
+        # Projects back from d_model to vocab_size
+        self.lm_head = Linear(d_model, vocab_size, device=device, dtype=dtype)
+
+    def forward(self, in_indices: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            in_indices: shape (Batch, Seq)
+        Returns:
+            Logits: shape (Batch, Seq, Vocab_Size)
+        """
+        # 1. Embed tokens
+        x = self.token_embeddings(in_indices)
+        
+        # 2. Pass through Transformer blocks
+        for layer in self.layers:
+            x = layer(x)
+            
+        # 3. Final Normalization
+        x = self.ln_final(x)
+        
+        # 4. Output Projection
+        logits = self.lm_head(x)
+        
+        return logits

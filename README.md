@@ -96,3 +96,9 @@ cd ..
 
 #### Causal Masking With Rope Test
 ```uv run pytest -k test_multihead_self_attention_with_rope```
+
+#### Transformer Block Test
+```uv run pytest -k test_transformer_block```
+
+#### Implement the TransformerLM Test
+```uv run pytest -k test_transformer_lm```
