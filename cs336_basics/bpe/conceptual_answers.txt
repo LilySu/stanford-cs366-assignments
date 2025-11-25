@@ -1,0 +1,37 @@
+run scripts:
+uv venv --python 3.11
+source .venv/bin/activate
+uv run pytest tests/test_train_bpe.py -v
+
+
+
+print(repr(chr(0)))
+'\x00'
+print(chr(0)) did not return anything.
+The string representation (__repr__()) shows '\x00' as unicode
+The null character otherwise does not have a string representation.
+
+
+>>> test_string = "this is a test" + chr(0) + "string"
+>>> print(test_string)
+this is a teststring
+
+print(len(test_string))
+21
+
+When chr(0) occurs in text, it's present in the string (increases length) but invisible when printed, making it appear that text on either side is concatenated together without the character.
+
+a. UTF-8 is smaller than UTF-16, and therefore more compact, requiring less storage space.
+UTF-8 ensures universal compatibility primarily with the entire Unicode character set (all written languages and symbols worldwide) and with legacy ASCII systems.
+There are no byte order marks or platform endianness issues
+b. decode_utf8_bytes_to_string_wrong in that it is decoding one character at a time sequentially. 
+This would fail due to failure of byte-alignment when certain characters may fail at decoding.
+Instead, using .decode will process the entire bytestring at the same time to handle characters where 
+the starting byte may not be a valid UTF-8 datatype. Certain characters are continuation bytes that 
+will result in an error. 
+c. b'\xc2\x00'
+
+BPE Training on TinyStories:
+a. Training took approximately 0.63 minutes (~37.59 seconds) and used less than 1GB of RAM (well under the 30GB limit). The longest token in the vocabulary is " congratulations" at 16 bytes, which makes sense as it's a common encouraging word in children's stories.
+
+b. The get_pair_counts function takes the most time during tokenizer training, consuming approximately 50% of total execution time (26.8 seconds out of 53.7 seconds), followed by merge_pair at 21% of total time (11.5 seconds).
