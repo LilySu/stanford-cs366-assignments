@@ -250,29 +250,46 @@ def scaled_dot_product_attention(
         mask: Boolean mask of shape (..., seq_len_q, seq_len_k). 
               True means attend, False means ignore.
     """
+    # d_k = q.size(-1)
+
+    # # 1. Calculate Scores: (Q @ K^T) / sqrt(d_k)
+    # # We transpose the last two dimensions of K to match (..., d_k, seq_len_k)
+    # # Resulting shape: (..., seq_len_q, seq_len_k)
+    # scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)
+
+    # # 2. Apply Masking
+    # if mask is not None:
+    #     # The prompt says: "add a -infinity in any entry of the mask matrix that is False"
+    #     # masked_fill takes a boolean mask where True indicates elements to fill.
+    #     # Since our mask has False for items to hide, we use ~mask (logical NOT).
+    #     scores = scores.masked_fill(~mask, -float('inf'))
+
+    # # 3. Softmax
+    # # Apply softmax to the last dimension (the key dimension) to get probabilities.
+    # # You can use the 'softmax' function you implemented in the previous step, 
+    # # or F.softmax if that isn't available in this scope. 
+    # # Assuming 'softmax' from the previous step is available:
+    # attn_probs = softmax(scores, dim=-1) 
+
+    # # 4. Weighted Sum: (Probabilities @ V)
+    # # Shape: (..., seq_len_q, seq_len_k) @ (..., seq_len_v, d_v) -> (..., seq_len_q, d_v)
+    # output = torch.matmul(attn_probs, v)
+    print(f"DEBUG: Running Optimized SDPA. Shape: {q.shape}")
+
+    # return output
     d_k = q.size(-1)
 
-    # 1. Calculate Scores: (Q @ K^T) / sqrt(d_k)
-    # We transpose the last two dimensions of K to match (..., d_k, seq_len_k)
-    # Resulting shape: (..., seq_len_q, seq_len_k)
+    # 1. Calculate Scores
     scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)
 
     # 2. Apply Masking
     if mask is not None:
-        # The prompt says: "add a -infinity in any entry of the mask matrix that is False"
-        # masked_fill takes a boolean mask where True indicates elements to fill.
-        # Since our mask has False for items to hide, we use ~mask (logical NOT).
         scores = scores.masked_fill(~mask, -float('inf'))
 
-    # 3. Softmax
-    # Apply softmax to the last dimension (the key dimension) to get probabilities.
-    # You can use the 'softmax' function you implemented in the previous step, 
-    # or F.softmax if that isn't available in this scope. 
-    # Assuming 'softmax' from the previous step is available:
-    attn_probs = softmax(scores, dim=-1) 
+    # F.softmax which is fused and optimized for speed.
+    attn_probs = F.softmax(scores, dim=-1) 
 
-    # 4. Weighted Sum: (Probabilities @ V)
-    # Shape: (..., seq_len_q, seq_len_k) @ (..., seq_len_v, d_v) -> (..., seq_len_q, d_v)
+    # 4. Weighted Sum
     output = torch.matmul(attn_probs, v)
 
     return output
@@ -329,8 +346,16 @@ class MultiHeadSelfAttention(nn.Module):
         # 3. Apply RoPE (if provided)
         # RoPE applies to Q and K
         if rope_module is not None and token_positions is not None:
-            q = rope_module(q, token_positions)
-            k = rope_module(k, token_positions)
+            # FIX: Reshape token_positions for broadcasting over heads.
+            # token_positions is (Batch, Seq). We need (Batch, 1, Seq).
+            # This ensures RoPE output is (Batch, 1, Seq, Dim), which broadcasts to (Batch, Heads, Seq, Dim).
+            if token_positions.ndim == 2: 
+                rope_positions = token_positions.unsqueeze(1)
+            else:
+                rope_positions = token_positions
+                
+            q = rope_module(q, rope_positions)
+            k = rope_module(k, rope_positions)
 
         # 4. Create Causal Mask
         # We want a Lower Triangular mask (True = Attend, False = Ignore)
