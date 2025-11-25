@@ -111,3 +111,6 @@ cd ..
 
 #### Cosine Learning Rate Test
 ```uv run pytest -k test_get_lr_cosine_schedule```
+
+#### Gradient Clipping Test
+```uv run pytest -k test_gradient_clipping```

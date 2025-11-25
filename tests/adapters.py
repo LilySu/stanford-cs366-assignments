@@ -18,7 +18,7 @@ from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
     SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
     TransformerLM, compute_cross_entropy_loss, AdamW,
-    learning_rate_schedule)
+    learning_rate_schedule, gradient_clipping)
 
 
 def run_linear(
@@ -680,8 +680,7 @@ def run_gradient_clipping(parameters: Iterable[torch.nn.Parameter], max_l2_norm:
 
     The gradients of the parameters (parameter.grad) should be modified in-place.
     """
-    raise NotImplementedError
-
+    gradient_clipping(parameters, max_l2_norm)
 
 def get_adamw_cls() -> Any:
     """

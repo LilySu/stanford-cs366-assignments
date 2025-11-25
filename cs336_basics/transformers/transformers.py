@@ -664,3 +664,30 @@ def learning_rate_schedule(
     coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio))
     
     return min_learning_rate + coeff * (max_learning_rate - min_learning_rate)
+
+
+def gradient_clipping(parameters: Iterable[torch.nn.Parameter], max_l2_norm: float, eps: float = 1e-6) -> None:
+    """
+    Computes the global L2 norm of the gradients and scales them if the norm
+    exceeds max_l2_norm.
+    """
+    # 1. Collect all parameters that actually have a gradient (skip frozen ones)
+    # We must convert to a list to avoid exhausting the iterator if it's a generator
+    params = [p for p in parameters if p.grad is not None]
+    
+    if not params:
+        return
+
+    # 2. Compute the global L2 norm: sqrt(sum(param_grad_norm^2))
+    # We detach the grads to ensure we don't track this computation in the graph
+    sum_squares = sum(p.grad.detach().pow(2).sum() for p in params)
+    total_norm = sum_squares.sqrt()
+
+    # 3. If the norm exceeds the maximum, scale all gradients down
+    # Prompt logic: If norm < max, leave as is; otherwise scale.
+    if total_norm > max_l2_norm:
+        scale_factor = max_l2_norm / (total_norm + eps)
+        
+        for p in params:
+            # Modify gradients in-place
+            p.grad.mul_(scale_factor)
