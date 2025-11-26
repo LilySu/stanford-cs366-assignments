@@ -1,4 +1,6 @@
 import math
+import numpy as np
+import numpy.typing as npt
 
 import torch
 import torch.nn as nn
@@ -691,3 +693,30 @@ def gradient_clipping(parameters: Iterable[torch.nn.Parameter], max_l2_norm: flo
         for p in params:
             # Modify gradients in-place
             p.grad.mul_(scale_factor)
+
+
+def get_batch(
+    data: npt.NDArray, batch_size: int, context_length: int, device: str
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """
+    Standalone function to sample a batch of data and targets.
+    """
+    # 1. Calculate valid starting indices range
+    # We need context_length + 1 items (for x and y)
+    high = len(data) - context_length
+
+    # 2. Randomly sample starting indices
+    ix = torch.randint(low=0, high=high, size=(batch_size,))
+
+    # 3. Stack data into tensors
+    # Convert to int64 for PyTorch LongTensor compatibility
+    x = torch.stack([torch.from_numpy((data[i : i + context_length]).astype(np.int64)) for i in ix])
+    y = torch.stack([torch.from_numpy((data[i + 1 : i + context_length + 1]).astype(np.int64)) for i in ix])
+
+    # 4. Move to the requested device
+    if device is not None:
+        # 'mps' for Mac, 'cuda' for Nvidia, 'cpu' for standard
+        x = x.to(device)
+        y = y.to(device)
+
+    return x, y

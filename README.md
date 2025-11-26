@@ -114,3 +114,6 @@ cd ..
 
 #### Gradient Clipping Test
 ```uv run pytest -k test_gradient_clipping```
+
+#### Data Loading Get Batch Test
+```uv run pytest -k test_get_batch```

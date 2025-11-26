@@ -18,7 +18,7 @@ from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
     SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
     TransformerLM, compute_cross_entropy_loss, AdamW,
-    learning_rate_schedule, gradient_clipping)
+    learning_rate_schedule, gradient_clipping, get_batch)
 
 
 def run_linear(
@@ -622,15 +622,12 @@ def run_get_batch(
         is the sampled input sequences, and the second tuple item is the corresponding
         language modeling labels.
     """
-    # We need to sample `batch_size` starting indices.
-    # The last valid starting index is len(dataset) - context_length - 1 (for the label).
-    high = len(dataset) - context_length
-    ix = torch.randint(low=0, high=high, size=(batch_size,))
-    
-    x = torch.stack([torch.from_numpy((dataset[i : i + context_length]).astype(np.int64)) for i in ix])
-    y = torch.stack([torch.from_numpy((dataset[i + 1 : i + 1 + context_length]).astype(np.int64)) for i in ix])
-    
-    return x.to(device), y.to(device)
+    return get_batch(
+            data=dataset, 
+            batch_size=batch_size, 
+            context_length=context_length, 
+            device=device
+        )
 
 
 def run_softmax(in_features: Float[Tensor, " ..."], dim: int) -> Float[Tensor, " ..."]:
