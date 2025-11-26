@@ -1,0 +1,121 @@
+_wandb:
+    value:
+        cli_version: 0.21.2
+        e:
+            keiuwm2q2bpw9eeep3t2op3qtsb2kj13:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 10
+                    memoryGb: 8
+                    name: Apple M2
+                    pcpuCores: 4
+                    ramTotalBytes: "8589934592"
+                    swapTotalBytes: "7516192768"
+                args:
+                    - --train_data
+                    - data/owt_train.bin
+                    - --val_data
+                    - data/owt_valid.bin
+                    - --debug_subset_tokens
+                    - "10000"
+                    - --max_iters
+                    - "10"
+                    - --eval_interval
+                    - "2"
+                    - --save_interval
+                    - "5"
+                codePath: cs336_basics/train.py
+                codePathLocal: train.py
+                cpu_count: 8
+                cpu_count_logical: 8
+                disk:
+                    /:
+                        total: "245107195904"
+                        used: "230327083008"
+                email: lilyxsu@gmail.com
+                executable: /Users/lilysu/Documents/git/assignment1-basics/.venv/bin/python3
+                git:
+                    commit: 8745068493a5634be50185beaa135cf1f910b673
+                    remote: git@github.com:LilySu/stanford-cs366-assignments.git
+                host: Lilys-Laptop.local
+                memory:
+                    total: "8589934592"
+                os: macOS-15.1-arm64-arm-64bit-Mach-O
+                program: /Users/lilysu/Documents/git/assignment1-basics/cs336_basics/train.py
+                python: CPython 3.13.1
+                root: /Users/lilysu/Documents/git/assignment1-basics/cs336_basics
+                startedAt: "2025-11-26T08:01:51.439275Z"
+                writerId: keiuwm2q2bpw9eeep3t2op3qtsb2kj13
+        m: []
+        python_version: 3.13.1
+        t:
+            "1":
+                - 1
+                - 11
+            "2":
+                - 1
+                - 11
+            "3":
+                - 16
+            "4": 3.13.1
+            "5": 0.21.2
+            "12": 0.21.2
+            "13": darwin-arm64
+batch_size:
+    value: 12
+beta1:
+    value: 0.9
+beta2:
+    value: 0.95
+context_length:
+    value: 1024
+cosine_cycle_iters:
+    value: 10000
+d_ff:
+    value: 2048
+d_model:
+    value: 768
+debug_subset_tokens:
+    value: 10000
+device:
+    value: null
+eval_interval:
+    value: 2
+eval_iters:
+    value: 200
+grad_clip:
+    value: 1
+log_interval:
+    value: 10
+lr:
+    value: 0.0006
+max_iters:
+    value: 10
+min_lr:
+    value: 6e-05
+no_wandb:
+    value: false
+num_heads:
+    value: 12
+num_layers:
+    value: 12
+out_dir:
+    value: out
+resume:
+    value: null
+rope_theta:
+    value: 10000
+save_interval:
+    value: 5
+train_data:
+    value: ../data/owt_train.bin
+val_data:
+    value: ../data/owt_valid.bin
+vocab_size:
+    value: 50257
+wandb_project:
+    value: transformer-training
+warmup_iters:
+    value: 200
+weight_decay:
+    value: 0.1

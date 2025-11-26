@@ -283,7 +283,7 @@ def scaled_dot_product_attention(
     # # 4. Weighted Sum: (Probabilities @ V)
     # # Shape: (..., seq_len_q, seq_len_k) @ (..., seq_len_v, d_v) -> (..., seq_len_q, d_v)
     # output = torch.matmul(attn_probs, v)
-    print(f"DEBUG: Running Optimized SDPA. Shape: {q.shape}")
+
 
     # return output
     d_k = q.size(-1)
@@ -737,6 +737,7 @@ def save_checkpoint(
         "model_state_dict": model.state_dict(),
         "optimizer_state_dict": optimizer.state_dict(),
         "iteration": iteration,
+        "config": config,
     }
     
     # Save the dictionary to the provided file path or file-like object
@@ -762,3 +763,95 @@ def load_checkpoint(
     
     # Return the saved iteration number
     return checkpoint_state["iteration"]
+
+
+@torch.no_grad()
+def generate_completion(
+    model: torch.nn.Module, 
+    prompt_tokens: torch.Tensor, 
+    max_new_tokens: int, 
+    context_length: int, 
+    temperature: float = 1.0, 
+    top_p: float = 0.0, 
+    eos_token_id: int = None
+) -> torch.Tensor:
+    """
+    Generates a completion for a given prompt using Temperature and Top-P (Nucleus) sampling.
+
+    Args:
+        model: The trained TransformerLM.
+        prompt_tokens: Tensor of shape (Batch, Seq_Len) containing the prompt.
+        max_new_tokens: Maximum number of tokens to generate.
+        context_length: The model's maximum context length (to crop input).
+        temperature: Temperature for scaling logits. Higher = more creative/random.
+                     (Default: 1.0. If < 1e-5, performs greedy sampling).
+        top_p: Nucleus sampling probability threshold (0.0 to 1.0). 
+               If > 0, keeps smallest set of tokens with cumulative prob >= top_p.
+        eos_token_id: The ID of the End-Of-Sentence token. If generated, stops decoding.
+
+    Returns:
+        torch.Tensor: The sequence containing the prompt + generated tokens.
+    """
+    model.eval()
+    
+    # We loop up to max_new_tokens times
+    for _ in range(max_new_tokens):
+        # 1. Crop the context
+        # If the sequence is longer than the model's block size, we must trim it
+        # so we only pass the last 'context_length' tokens.
+        idx_cond = prompt_tokens if prompt_tokens.size(1) <= context_length else prompt_tokens[:, -context_length:]
+
+        # 2. Forward pass
+        # We perform a forward pass to get logits for the whole sequence
+        logits = model(idx_cond)
+        
+        # 3. Select the last time step
+        # Shape becomes (Batch, Vocab_Size)
+        logits = logits[:, -1, :]
+
+        # 4. Apply Temperature
+        if temperature < 1e-5:
+            # Greedy decoding (argmax) if temperature is effectively 0
+            _, idx_next = torch.topk(logits, k=1, dim=-1)
+        else:
+            # Scale logits
+            logits = logits / temperature
+            
+            # 5. Apply Top-P (Nucleus) Sampling
+            if top_p > 0.0 and top_p < 1.0:
+                # Sort logits in descending order
+                sorted_logits, sorted_indices = torch.sort(logits, descending=True)
+                
+                # Compute cumulative probabilities
+                sorted_probs = F.softmax(sorted_logits, dim=-1)
+                cumulative_probs = torch.cumsum(sorted_probs, dim=-1)
+                
+                # Create mask for tokens to remove (those above the cumulative threshold)
+                sorted_indices_to_remove = cumulative_probs > top_p
+                
+                # Shift the mask right to keep the first token above the threshold
+                # (We always want at least one token to select from)
+                sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+                sorted_indices_to_remove[..., 0] = 0
+                
+                # Scatter the mask back to the original indices
+                indices_to_remove = sorted_indices_to_remove.scatter(
+                    dim=1, index=sorted_indices, src=sorted_indices_to_remove
+                )
+                
+                # Set masked logits to -infinity so they have 0 probability
+                logits[indices_to_remove] = float('-inf')
+
+            # 6. Sample from the distribution
+            probs = F.softmax(logits, dim=-1)
+            idx_next = torch.multinomial(probs, num_samples=1)
+
+        # 7. Concatenate the new token to the sequence
+        prompt_tokens = torch.cat((prompt_tokens, idx_next), dim=1)
+
+        # 8. Check for Stop Token
+        # If we generated the EOS token, stop immediately
+        if eos_token_id is not None and idx_next.item() == eos_token_id:
+            break
+
+    return prompt_tokens
