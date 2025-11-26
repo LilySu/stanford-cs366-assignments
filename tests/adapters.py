@@ -18,7 +18,8 @@ from cs336_basics.transformers.transformers import (
     Embedding, Linear, MultiHeadSelfAttention, RotaryPositionalEmbedding,
     SwiGLU, scaled_dot_product_attention, softmax, TransformerBlock,
     TransformerLM, compute_cross_entropy_loss, AdamW,
-    learning_rate_schedule, gradient_clipping, get_batch)
+    learning_rate_schedule, gradient_clipping, get_batch,
+    save_checkpoint, load_checkpoint)
 
 
 def run_linear(
@@ -735,7 +736,7 @@ def run_save_checkpoint(
             we've completed.
         out (str | os.PathLike | BinaryIO | IO[bytes]): Path or file-like object to serialize the model, optimizer, and iteration to.
     """
-    raise NotImplementedError
+    save_checkpoint(model, optimizer, iteration, out)
 
 
 def run_load_checkpoint(
@@ -756,7 +757,7 @@ def run_load_checkpoint(
     Returns:
         int: the previously-serialized number of iterations.
     """
-    raise NotImplementedError
+    return load_checkpoint(src, model, optimizer)
 
 
 def get_tokenizer(

@@ -1,3 +1,4 @@
+import os
 import math
 import numpy as np
 import numpy.typing as npt
@@ -11,7 +12,7 @@ from torch import Tensor
 from jaxtyping import Float, Int
 
 from collections.abc import Callable, Iterable
-from typing import Optional
+from typing import Optional, BinaryIO, IO, Union
 
 
 class Linear(nn.Module):
@@ -720,3 +721,44 @@ def get_batch(
         y = y.to(device)
 
     return x, y
+
+
+def save_checkpoint(
+    model: torch.nn.Module,
+    optimizer: torch.optim.Optimizer,
+    iteration: int,
+    out: Union[str, os.PathLike, BinaryIO, IO[bytes]],
+):
+    """
+    Serializes model and optimizer states along with the iteration number.
+    """
+    # Pack the state into a dictionary
+    checkpoint_state = {
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "iteration": iteration,
+    }
+    
+    # Save the dictionary to the provided file path or file-like object
+    torch.save(checkpoint_state, out)
+
+
+def load_checkpoint(
+    src: Union[str, os.PathLike, BinaryIO, IO[bytes]],
+    model: torch.nn.Module,
+    optimizer: torch.optim.Optimizer,
+) -> int:
+    """
+    Loads state from a checkpoint into the provided model and optimizer.
+    Returns the iteration number.
+    """
+    # Load the dictionary from the source
+    # Note: torch.load handles both file paths and file-like objects
+    checkpoint_state = torch.load(src)
+    
+    # Restore the model and optimizer states
+    model.load_state_dict(checkpoint_state["model_state_dict"])
+    optimizer.load_state_dict(checkpoint_state["optimizer_state_dict"])
+    
+    # Return the saved iteration number
+    return checkpoint_state["iteration"]
