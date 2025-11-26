@@ -1,0 +1,49 @@
+{
+  "os": "macOS-15.1-arm64-arm-64bit",
+  "python": "CPython 3.11.5",
+  "startedAt": "2025-11-26T22:42:19.995212Z",
+  "args": [
+    "--mode",
+    "train",
+    "--train_data",
+    "../data/TinyStoriesV2-GPT4-train.bin",
+    "--val_data",
+    "../data/TinyStoriesV2-GPT4-valid.bin",
+    "--max_iters",
+    "2",
+    "--cosine_cycle_iters",
+    "2"
+  ],
+  "program": "/Users/lilysu/Documents/git/assignment1-basics/cs336_basics/run.py",
+  "codePath": "cs336_basics/run.py",
+  "codePathLocal": "run.py",
+  "git": {
+    "remote": "git@github.com:LilySu/stanford-cs366-assignments.git",
+    "commit": "3a04feb9ba35f24679cd9b0685b5adc0cdc412b5"
+  },
+  "email": "lilyxsu@gmail.com",
+  "root": "/Users/lilysu/Documents/git/assignment1-basics/cs336_basics",
+  "host": "Lilys-Laptop.local",
+  "executable": "/Users/lilysu/anaconda3/bin/python",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "245107195904",
+      "used": "229664321536"
+    }
+  },
+  "memory": {
+    "total": "8589934592"
+  },
+  "apple": {
+    "name": "Apple M2",
+    "ecpuCores": 4,
+    "pcpuCores": 4,
+    "gpuCores": 10,
+    "memoryGb": 8,
+    "swapTotalBytes": "5368709120",
+    "ramTotalBytes": "8589934592"
+  },
+  "writerId": "y0pwjcan5ucvb1l9zuzipgtt17hjca4h"
+}

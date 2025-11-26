@@ -120,3 +120,22 @@ cd ..
 
 #### Checkpointing Test
 ```uv run pytest -k test_checkpointing```
+
+#### Run Sample Training Loop
+```python run.py --mode sample```
+
+#### Run Full Training Loop running a sample of test
+```python run.py --mode train \
+  --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+  --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+  --max_iters 2 \
+  --cosine_cycle_iters 2```
+
+#### Run Full Training Loop of what was asked in the assignment for cpu/mps
+```python run.py --mode train \
+  --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+  --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+  --max_iters 5000 \
+  --cosine_cycle_iters 5000 \
+  --exp_name "mps-baseline-17M" \
+  --tags baseline mps```
