@@ -73,15 +73,19 @@ def prepare_data_if_needed(bin_path):
     raise FileNotFoundError(f"Could not find {bin_path} or {txt_path}.")
 
 # --- Helper 3: Estimate Loss ---
+# --- Helper 3: Estimate Loss ---
 def estimate_loss(model, data, batch_size, context_length, device, eval_iters):
     out = {}
     model.eval()
     losses = torch.zeros(eval_iters)
-    for k in range(eval_iters):
-        X, Y = get_batch(data, batch_size, context_length, device)
-        logits = model(X)
-        loss = compute_cross_entropy_loss(logits, Y).mean()
-        losses[k] = loss.item()
+    
+    with torch.no_grad():
+        for k in range(eval_iters):
+            X, Y = get_batch(data, batch_size, context_length, device)
+            logits = model(X)
+            loss = compute_cross_entropy_loss(logits, Y).mean()
+            losses[k] = loss.item()
+            
     model.train()
     return losses.mean()
 
