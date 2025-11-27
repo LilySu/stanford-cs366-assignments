@@ -493,26 +493,34 @@ def compute_cross_entropy_loss(
     log(sum(exp(x[j]))) = m + log(sum(exp(x[j] - m)))
     where m = max(x).
     """
-    # 1. Find the maximum value for numerical stability (m)
-    # keepdim=True ensures shape remains (... , 1) for broadcasting
-    m = logits.max(dim=-1, keepdim=True).values
+    # # 1. Find the maximum value for numerical stability (m)
+    # # keepdim=True ensures shape remains (... , 1) for broadcasting
+    # m = logits.max(dim=-1, keepdim=True).values
 
-    # 2. Compute Log-Sum-Exp with stability trick
-    # exp(logits - m) prevents overflow
-    # sum over the vocabulary dimension (last dimension)
-    sum_exp = (logits - m).exp().sum(dim=-1, keepdim=True)
-    log_sum_exp = m + sum_exp.log()
+    # # 2. Compute Log-Sum-Exp with stability trick
+    # # exp(logits - m) prevents overflow
+    # # sum over the vocabulary dimension (last dimension)
+    # sum_exp = (logits - m).exp().sum(dim=-1, keepdim=True)
+    # log_sum_exp = m + sum_exp.log()
 
-    # 3. Extract the logits corresponding to the correct targets (x[class])
-    # We need to gather the specific logit for the target class at each position.
-    # targets shape: (...) -> unsqueeze to (..., 1) to match gather dim
-    gathered_logits = logits.gather(dim=-1, index=targets.unsqueeze(-1))
+    # # 3. Extract the logits corresponding to the correct targets (x[class])
+    # # We need to gather the specific logit for the target class at each position.
+    # # targets shape: (...) -> unsqueeze to (..., 1) to match gather dim
+    # gathered_logits = logits.gather(dim=-1, index=targets.unsqueeze(-1))
     
-    # 4. Final Calculation: log_sum_exp - target_logit
-    # We squeeze the last dimension to match the original target shape (...)
-    loss = log_sum_exp - gathered_logits
+    # # 4. Final Calculation: log_sum_exp - target_logit
+    # # We squeeze the last dimension to match the original target shape (...)
+    # loss = log_sum_exp - gathered_logits
     
-    return loss.squeeze(-1)
+    # return loss.squeeze(-1)
+# PyTorch's cross_entropy expects:
+    # Input: (N, C) where C is vocab_size
+    # Target: (N) where each value is 0 <= targets[i] <= C-1
+    return F.cross_entropy(
+        logits.view(-1, logits.size(-1)), # Flatten batch and time dimensions
+        targets.view(-1),                 # Flatten targets to match
+        reduction='none'                  # Return loss per element (matches your docstring)
+    ).view(targets.size())                # Reshape back to (Batch, Time)
 
 
 class SGD(torch.optim.Optimizer):

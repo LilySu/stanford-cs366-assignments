@@ -7,6 +7,8 @@ import torch
 import wandb
 import tiktoken
 from tqdm import tqdm
+import torch
+torch.set_float32_matmul_precision('high')
 
 from modules.transformers import (
     TransformerLM, 
