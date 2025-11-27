@@ -1,0 +1,133 @@
+#!/bin/bash
+
+# ==============================================================================
+# SETUP
+# ==============================================================================
+mkdir -p ../logs
+
+# ==============================================================================
+# PART 1: LEARNING RATE SWEEP
+# ==============================================================================
+
+# 1. Baseline (LR 6e-4)
+python run.py \
+    --device cuda \
+    --exp_name "full-baseline-6e4" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_baseline_lr_6e4.txt
+
+# 2. High Learning Rate (LR 3e-3)
+python run.py \
+    --device cuda \
+    --exp_name "full-high-3e3" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_high_lr_3e3.txt
+
+# 3. Edge of Stability / Divergence (LR 1e-2)
+python run.py \
+    --device cuda \
+    --exp_name "full-diverge-1e2" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 1e-2 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_diverge_lr_1e2.txt
+
+
+# ==============================================================================
+# PART 2: BATCH SIZE EXPERIMENTS
+# ==============================================================================
+
+# 4. Batch Size 64 (Efficient)
+python run.py \
+    --device cuda \
+    --exp_name "batch-size-64" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 20000 \
+    --cosine_cycle_iters 20000 \
+    --lr 1e-3 \
+    --warmup_iters 500 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_batch_size_64.txt
+
+# 5. Batch Size 128 (High Throughput)
+python run.py \
+    --device cuda \
+    --exp_name "batch-size-128" \
+    --batch_size 128 \
+    --context_length 256 \
+    --max_iters 10000 \
+    --cosine_cycle_iters 10000 \
+    --lr 1.5e-3 \
+    --warmup_iters 250 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_batch_size_128.txt
+
+# 6. Batch Size 256 (Memory Stress Test)
+python run.py \
+    --device cuda \
+    --exp_name "batch-size-256" \
+    --batch_size 256 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --cosine_cycle_iters 5000 \
+    --lr 2e-3 \
+    --warmup_iters 150 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_batch_size_256.txt
+
+# 7. Batch Size 1 (Slow Control)
+python run.py \
+    --device cuda \
+    --exp_name "batch-size-01" \
+    --batch_size 1 \
+    --context_length 256 \
+    --max_iters 1000 \
+    --cosine_cycle_iters 1000 \
+    --lr 3e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-26_02_batch_size_01.txt

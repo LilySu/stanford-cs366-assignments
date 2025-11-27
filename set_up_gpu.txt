@@ -1,0 +1,38 @@
+Runpod > Pods > Pytorch 2.4.0 > RTX 4090
+
+In IDE CTRL+SHIFT+P > Add a Remote Connection
+
+Copy "SSH over exposed TCP" address
+
+CTRL+SHIFT+P > Connect to Remote
+
+Pick pasted IP address
+
+"continue"
+
+"open Folder"
+
+delete root, type in "workspace" directory in ssh'ed server
+
+git clone https://github.com/LilySu/stanford-cs366-assignments.git
+
+cd stanford-cs366-assignments
+
+mkdir -p data
+cd data
+
+wget https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-train.txt
+wget https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-valid.txt
+
+wget https://huggingface.co/datasets/stanford-cs336/owt-sample/resolve/main/owt_train.txt.gz
+gunzip owt_train.txt.gz
+wget https://huggingface.co/datasets/stanford-cs336/owt-sample/resolve/main/owt_valid.txt.gz
+gunzip owt_valid.txt.gz
+
+cd ..
+
+cd cs336_basics
+
+pip install torch numpy tqdm tiktoken wandb jaxtyping
+
+wandb login
