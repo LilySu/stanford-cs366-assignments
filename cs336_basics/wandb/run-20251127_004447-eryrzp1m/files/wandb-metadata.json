@@ -1,0 +1,74 @@
+{
+  "os": "Linux-6.8.0-59-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.11.10",
+  "startedAt": "2025-11-27T00:44:47.108830Z",
+  "args": [
+    "--device",
+    "cuda",
+    "--exp_name",
+    "full-baseline-6e4",
+    "--batch_size",
+    "32",
+    "--context_length",
+    "256",
+    "--max_iters",
+    "40000",
+    "--lr",
+    "6e-4",
+    "--vocab_size",
+    "10000",
+    "--d_model",
+    "512",
+    "--d_ff",
+    "1344",
+    "--num_layers",
+    "4",
+    "--num_heads",
+    "16",
+    "--rope_theta",
+    "10000",
+    "--warmup_iters",
+    "1000",
+    "--cosine_cycle_iters",
+    "40000",
+    "--train_data",
+    "../data/TinyStoriesV2-GPT4-train.bin",
+    "--val_data",
+    "../data/TinyStoriesV2-GPT4-valid.bin"
+  ],
+  "program": "/workspace/stanford-cs366-assignments/cs336_basics/run.py",
+  "codePath": "cs336_basics/run.py",
+  "codePathLocal": "run.py",
+  "git": {
+    "remote": "https://github.com/LilySu/stanford-cs366-assignments.git",
+    "commit": "d9487785ebf826c409e92348ea1e7b2d0aa9a7b9"
+  },
+  "email": "lilyxsu@gmail.com",
+  "root": "/workspace/stanford-cs366-assignments/cs336_basics",
+  "host": "33339b267786",
+  "executable": "/usr/bin/python",
+  "cpu_count": 64,
+  "cpu_count_logical": 128,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "21474836480",
+      "used": "841396224"
+    }
+  },
+  "memory": {
+    "total": "540844867584"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada",
+      "uuid": "GPU-96fcaa4d-25b7-29b4-75e6-d642df1bd7e4"
+    }
+  ],
+  "cudaVersion": "12.4",
+  "writerId": "pfqdejgm5r7jwdly9v5txm1beu8eczxw"
+}

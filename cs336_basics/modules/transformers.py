@@ -190,28 +190,20 @@ class RotaryPositionalEmbedding(nn.Module):
         cos = nn.functional.embedding(token_positions, self.cos_cached)
         sin = nn.functional.embedding(token_positions, self.sin_cached)
 
-        # 2. Apply rotation formula
-        # x_rotated = (x * cos) + (rotate_half(x) * sin)
-        
-        # We need to perform the "rotate_half" logic specifically for adjacent pairs:
-        # (x0, x1) -> (-x1, x0)
-        # We reshape to (..., d/2, 2) to easily swap pairs
-        
-        # View x as pairs
+        # 2. Unsqueeze for Heads
+        cos = cos.unsqueeze(1)
+        sin = sin.unsqueeze(1)
+
+        # 3. Apply rotation formula
         x_pairs = x.view(*x.shape[:-1], -1, 2)
-        
-        # Unbind into even and odd components
-        x_evens = x_pairs[..., 0] # x_{2k}
-        x_odds  = x_pairs[..., 1] # x_{2k+1}
-        
-        # Create the rotated version: [-x_{2k+1}, x_{2k}]
+        x_evens = x_pairs[..., 0]
+        x_odds  = x_pairs[..., 1]
         x_rotated_pairs = torch.stack((-x_odds, x_evens), dim=-1)
-        
-        # Flatten back to original shape
         x_rotated = x_rotated_pairs.flatten(start_dim=-2)
 
-        # Final application
-        return (x * cos) + (x_rotated * sin)
+        # SAFETY CHANGE: Cast cos/sin to x.dtype
+        # This prevents errors if x is BF16 but buffers are FP32
+        return (x * cos.to(x.dtype)) + (x_rotated * sin.to(x.dtype))
 
 
 def softmax(x: torch.Tensor, dim: int) -> torch.Tensor:
@@ -723,25 +715,18 @@ def get_batch(
     return x, y
 
 
-def save_checkpoint(
-    model: torch.nn.Module,
-    optimizer: torch.optim.Optimizer,
-    iteration: int,
-    out: Union[str, os.PathLike, BinaryIO, IO[bytes]],
-):
-    """
-    Serializes model and optimizer states along with the iteration number.
-    """
-    # Pack the state into a dictionary
-    checkpoint_state = {
-        "model_state_dict": model.state_dict(),
-        "optimizer_state_dict": optimizer.state_dict(),
-        "iteration": iteration,
-        "config": config,
+def save_checkpoint(model, optimizer, iter_num, out_path, config=None):
+    checkpoint = {
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'iter_num': iter_num,
     }
-    
-    # Save the dictionary to the provided file path or file-like object
-    torch.save(checkpoint_state, out)
+    # Save the config so we can reload the model structure later
+    if config is not None:
+        checkpoint['config'] = config
+        
+    print(f"Saving checkpoint to {out_path}...")
+    torch.save(checkpoint, out_path)
 
 
 def load_checkpoint(

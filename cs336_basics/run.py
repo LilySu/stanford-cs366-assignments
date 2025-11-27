@@ -150,9 +150,7 @@ def main():
         device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Using device: {device}")
     
-    # Explicitly warn/ensure no TF32 on MPS (though usually off by default)
     if device == 'mps':
-        # Ensure we do NOT set float32_matmul_precision high for MPS
         pass 
 
     # ==========================================
@@ -228,11 +226,9 @@ def main():
     model = TransformerLM(device=device, **model_config)
     model.to(device)
 
-    # --- TORCH.COMPILE LOGIC (Updated per instructions) ---
-    # As of PyTorch 2.0+, compiling speeds up training significantly
+    # --- TORCH.COMPILE LOGIC ---
     print("Compiling model...")
     if device == 'mps':
-        # MPS requires 'aot_eager' backend, Inductor is not supported yet
         try:
             model = torch.compile(model, backend="aot_eager")
             print(" -> Model compiled with backend='aot_eager' (MPS optimized)")
@@ -242,7 +238,6 @@ def main():
         model = torch.compile(model)
         print(" -> Model compiled (CPU optimized)")
     else:
-        # CUDA / Default
         model = torch.compile(model)
         print(" -> Model compiled (Standard)")
     # -----------------------------------------------------
@@ -301,13 +296,18 @@ def main():
             if not args.no_wandb: 
                 wandb.log({"val/loss": val_loss, "train/wallclock_time": elapsed_time, "iter": iter_num})
 
-        # Save
+        # --- ROLLING CHECKPOINT ---
+        # Saves every 'save_interval' steps, but overwrites the SAME file.
+        # Uses constant disk space (~70MB total).
         if iter_num > 0 and iter_num % args.save_interval == 0:
-            ckpt_path = os.path.join(args.out_dir, f"ckpt_{iter_num}.pt")
+            # Ensure we overwrite 'ckpt_latest.pt' instead of creating 'ckpt_1000.pt', 'ckpt_2000.pt', etc.
+            ckpt_path = os.path.join(args.out_dir, "ckpt_latest.pt")
+            print(f"Saving rolling checkpoint to {ckpt_path}...")
             save_checkpoint(model, optimizer, iter_num, ckpt_path, config=model_config)
             
         iter_num += 1
 
+    # Save Final Model
     save_checkpoint(model, optimizer, iter_num, os.path.join(args.out_dir, "ckpt_final.pt"), config=model_config)
     print("Training Complete.")
 
