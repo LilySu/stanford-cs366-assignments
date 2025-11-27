@@ -848,3 +848,105 @@ def generate_completion(
             break
 
     return prompt_tokens
+
+
+# ==============================================================================
+# ADD THESE CLASSES TO THE BOTTOM OF transformers.py
+# ==============================================================================
+
+class TransformerBlockSiLU(nn.Module):
+    def __init__(
+        self, 
+        d_model: int, 
+        num_heads: int, 
+        d_ff: int, 
+        max_seq_len: int,
+        theta: float,
+        device=None, 
+        dtype=None
+    ):
+        super().__init__()
+        self.d_model = d_model
+        self.ln1 = RMSNorm(d_model, device=device, dtype=dtype)
+        self.attn = MultiHeadSelfAttention(d_model, num_heads, device=device, dtype=dtype)
+        self.ln2 = RMSNorm(d_model, device=device, dtype=dtype)
+        
+        # --- SiLU FFN Implementation (No Gate) ---
+        # 1. Calculate d_ff for SiLU: 4 * d_model (to match parameter count of SwiGLU)
+        # Note: The 'd_ff' passed in arg is usually ignored here in favor of the 4x logic 
+        # required by the assignment, but we calculate it dynamically.
+        hidden_dim = 4 * d_model
+        # Round up to nearest multiple of 64 for Tensor Cores
+        self.d_ff_silu = ((hidden_dim + 63) // 64) * 64
+        
+        # 2. Define the TWO linear layers (W1 expansion, W2 projection)
+        self.w1 = Linear(d_model, self.d_ff_silu, device=device, dtype=dtype)
+        self.w2 = Linear(self.d_ff_silu, d_model, device=device, dtype=dtype)
+        
+        d_head = d_model // num_heads
+        self.rope = RotaryPositionalEmbedding(theta, d_head, max_seq_len, device=device)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        batch_size, seq_len, _ = x.shape
+        positions = torch.arange(seq_len, device=x.device).unsqueeze(0).expand(batch_size, seq_len)
+        
+        # Attention Sublayer (Standard)
+        resid = x
+        x = self.ln1(x)
+        x = self.attn(x, rope_module=self.rope, token_positions=positions)
+        x = x + resid
+        
+        # FFN Sublayer (Standard SiLU)
+        resid = x
+        x = self.ln2(x)
+        
+        # FFN = W2(SiLU(W1(x)))
+        x = self.w1(x)
+        x = F.silu(x)
+        x = self.w2(x)
+        
+        x = x + resid
+        return x
+
+
+class TransformerLMSiLU(nn.Module):
+    def __init__(
+        self,
+        vocab_size: int,
+        context_length: int,
+        d_model: int,
+        num_layers: int,
+        num_heads: int,
+        d_ff: int,
+        rope_theta: float,
+        device=None,
+        dtype=None,
+    ):
+        super().__init__()
+        self.d_model = d_model
+        self.token_embeddings = Embedding(vocab_size, d_model, device=device, dtype=dtype)
+        
+        # Use the SiLU Block
+        self.layers = nn.ModuleList([
+            TransformerBlockSiLU(
+                d_model=d_model,
+                num_heads=num_heads,
+                d_ff=d_ff, # This arg is technically overridden inside the block to be 4x
+                max_seq_len=context_length,
+                theta=rope_theta,
+                device=device,
+                dtype=dtype
+            )
+            for _ in range(num_layers)
+        ])
+        
+        self.ln_final = RMSNorm(d_model, device=device, dtype=dtype)
+        self.lm_head = Linear(d_model, vocab_size, device=device, dtype=dtype)
+
+    def forward(self, in_indices: torch.Tensor) -> torch.Tensor:
+        x = self.token_embeddings(in_indices)
+        for layer in self.layers:
+            x = layer(x)
+        x = self.ln_final(x)
+        logits = self.lm_head(x)
+        return logits

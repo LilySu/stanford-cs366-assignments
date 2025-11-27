@@ -1,68 +1,18 @@
 #!/bin/bash
 
 # ==============================================================================
-# SETUP
+# HARDWARE
 # ==============================================================================
-mkdir -p ../logs
+runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
+RTX 4090 for batches below 128
 
-# ==============================================================================
-# PART 1: LEARNING RATE SWEEP
-# ==============================================================================
+H200 for batches 128 or above
 
-# 1. Baseline (LR 6e-4)
-python run.py \
-    --device cuda \
-    --exp_name "full-baseline-6e4" \
-    --batch_size 32 \
-    --context_length 256 \
-    --max_iters 40000 \
-    --lr 6e-4 \
-    --vocab_size 50304 \
-    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
-    --rope_theta 10000 \
-    --warmup_iters 1000 \
-    --cosine_cycle_iters 40000 \
-    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
-    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
-    | tee ../logs/training_log_2025-11-26_02_baseline_lr_6e4.txt
-
-# 2. High Learning Rate (LR 3e-3)
-python run.py \
-    --device cuda \
-    --exp_name "full-high-3e3" \
-    --batch_size 32 \
-    --context_length 256 \
-    --max_iters 40000 \
-    --lr 3e-3 \
-    --vocab_size 50304 \
-    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
-    --rope_theta 10000 \
-    --warmup_iters 1000 \
-    --cosine_cycle_iters 40000 \
-    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
-    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
-    | tee ../logs/training_log_2025-11-26_02_high_lr_3e3.txt
-
-# 3. Edge of Stability / Divergence (LR 1e-2)
-python run.py \
-    --device cuda \
-    --exp_name "full-diverge-1e2" \
-    --batch_size 32 \
-    --context_length 256 \
-    --max_iters 40000 \
-    --lr 1e-2 \
-    --vocab_size 50304 \
-    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
-    --rope_theta 10000 \
-    --warmup_iters 1000 \
-    --cosine_cycle_iters 40000 \
-    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
-    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
-    | tee ../logs/training_log_2025-11-26_02_diverge_lr_1e2.txt
+A40 didn't work
 
 
 # ==============================================================================
-# PART 2: BATCH SIZE EXPERIMENTS
+# PART 1: BATCH SIZE EXPERIMENTS
 # ==============================================================================
 
 # 4. Batch Size 64 (Efficient)
@@ -99,7 +49,24 @@ python run.py \
     --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
     | tee ../logs/training_log_2025-11-26_02_batch_size_128.txt
 
-# 6. Batch Size 256 (Memory Stress Test)
+# 6. Batch Size 192 (High Load / Fallback)
+python run.py \
+    --device cuda \
+    --exp_name "batch-size-192" \
+    --batch_size 192 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --cosine_cycle_iters 5000 \
+    --lr 2e-3 \
+    --warmup_iters 150 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_01_batch_size_192.txt
+
+# 7. Batch Size 256 (Memory Stress Test)
 python run.py \
     --device cuda \
     --exp_name "batch-size-256" \
@@ -116,7 +83,7 @@ python run.py \
     --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
     | tee ../logs/training_log_2025-11-26_02_batch_size_256.txt
 
-# 7. Batch Size 1 (Slow Control)
+# 8. Batch Size 1 (Slow Control)
 python run.py \
     --device cuda \
     --exp_name "batch-size-01" \
@@ -131,3 +98,470 @@ python run.py \
     --train_data ../data/TinyStoriesV2-GPT4-train.bin \
     --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
     | tee ../logs/training_log_2025-11-26_02_batch_size_01.txt
+
+# ==============================================================================
+# PART 2a: LEARNING RATE SWEEP (BATCH SIZE 32)
+# Standard Training: 40,000 Iters, Warmup 1000
+# ==============================================================================
+
+# 1. Baseline (LR 6e-4)
+python run.py \
+    --device cuda \
+    --exp_name "full-baseline-6e4" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_baseline_lr_6e4.txt
+
+# 2. High Learning Rate (LR 3e-3)
+python run.py \
+    --device cuda \
+    --exp_name "full-high-3e3" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_high_lr_3e3.txt
+
+# 3. Edge of Stability / Divergence (LR 1e-2)
+python run.py \
+    --device cuda \
+    --exp_name "full-diverge-1e2" \
+    --batch_size 32 \
+    --context_length 256 \
+    --max_iters 40000 \
+    --lr 1e-2 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 1000 \
+    --cosine_cycle_iters 40000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_diverge_lr_1e2.txt
+
+
+# ==============================================================================
+# PART 2b: LEARNING RATE SWEEP (BATCH SIZE 256)
+# High Batch/Memory Stress: 5,000 Iters, Warmup 150
+# ==============================================================================
+
+# 1. Baseline (LR 6e-4) - Batch 256
+python run.py \
+    --device cuda \
+    --exp_name "bs256-baseline-6e4" \
+    --batch_size 256 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 5000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_bs256_baseline_lr_6e4.txt
+
+# 2. High Learning Rate (LR 3e-3) - Batch 256
+# Note: Usually High LR + High Batch Size works better than High LR + Low Batch Size
+python run.py \
+    --device cuda \
+    --exp_name "bs256-high-3e3" \
+    --batch_size 256 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 5000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_bs256_high_lr_3e3.txt
+
+# 3. Edge of Stability / Divergence (LR 1e-2) - Batch 256
+python run.py \
+    --device cuda \
+    --exp_name "bs256-diverge-1e2" \
+    --batch_size 256 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 1e-2 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 5000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_02_bs256_diverge_lr_1e2.txt
+
+
+# ==============================================================================
+# PART 2c: LEARNING RATE SWEEP (BATCH SIZE 64)
+# Low Batch/High Granularity: 20,000 Iters (Equi-token scaling)
+# Note: Iterations scaled 4x to match the total data seen in Part 1b
+# ==============================================================================
+
+# 1. Baseline (LR 6e-4) - Batch 64
+# This is likely to be very stable but slower to train in wall-clock time
+python run.py \
+    --device cuda \
+    --exp_name "bs64-baseline-6e4" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 20000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 20000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_03_bs64_baseline_lr_6e4.txt
+
+# 2. High Learning Rate (LR 3e-3) - Batch 64
+# Note: With a smaller batch size, gradients are noisier. 
+# A high LR (3e-3) here carries a higher risk of instability than it did with BS 256.
+python run.py \
+    --device cuda \
+    --exp_name "bs64-high-3e3" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 20000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 20000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_03_bs64_high_lr_3e3.txt
+
+# 3. Edge of Stability / Divergence (LR 1e-2) - Batch 64
+# This is highly likely to diverge immediately due to the combination of 
+# small batch noise and very high learning rate.
+python run.py \
+    --device cuda \
+    --exp_name "bs64-diverge-1e2" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 20000 \
+    --lr 1e-2 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --rope_theta 10000 \
+    --warmup_iters 150 \
+    --cosine_cycle_iters 20000 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin \
+    | tee ../logs/training_log_2025-11-27_03_bs64_diverge_lr_1e2.txt
+
+
+
+
+
+# ==============================================================================
+# PART 3a: The "Previous Optimal" Test
+# Purpose: Show that the LR which was best for RMSNorm (3e-3) causes instability here.
+# Expectation: Even with fixed init, this will likely diverge (NaN) or oscillate wildly.
+# ==============================================================================
+# "----------------------------------------------------------------"
+# "Starting Run 1: No RMSNorm @ Previous Optimal LR (3e-3)"
+# "----------------------------------------------------------------"
+python run_No_RMSNorm.py \
+    --device cuda \
+    --exp_name "NoNorm-PrevOptimal-3e3" \
+    --wandb_project "assignment-no-norm" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# ==============================================================================
+# PART 3b: The "Stability" Test
+# Purpose: Find a learning curve that actually trains by lowering the rate.
+# Expectation: This should train stably, but the loss will decrease much slower.
+# ==============================================================================
+# "----------------------------------------------------------------"
+# "Starting Run 2: No RMSNorm @ Stable Low LR (3e-5)"
+# "----------------------------------------------------------------"
+python run_No_RMSNorm.py \
+    --device cuda \
+    --exp_name "NoNorm-Stable-3e5" \
+    --wandb_project "assignment-no-norm" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-5 \
+    --min_lr 3e-6 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+
+
+
+#!/bin/bash
+
+# ==============================================================================
+# PART 4: Pre-Norm vs. Post-Norm
+# Objective: Compare the training stability and performance of the modern Pre-Norm
+# (default) vs. the original Post-Norm architecture.
+# Expectation: Pre-Norm usually converges faster and is more stable. Post-Norm
+# forces gradients through the norm layer, which can sometimes slow down learning.
+# ==============================================================================
+
+# 4a. The Experiment: Post-Norm Architecture
+# We use the modified run_PostNorm.py here.
+# "----------------------------------------------------------------"
+# "Starting Part 4a: Post-Norm Training"
+# "----------------------------------------------------------------"
+python run_PostNorm.py \
+    --device cuda \
+    --exp_name "PostNorm-Baseline-6e4" \
+    --wandb_project "assignment-post-norm" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# 4b. The Baseline: Pre-Norm Architecture
+# We use the standard run.py (which is Pre-Norm by default) with identical settings.
+# "----------------------------------------------------------------"
+# "Starting Part 4b: Pre-Norm Baseline"
+# "----------------------------------------------------------------"
+python run.py \
+    --device cuda \
+    --exp_name "PreNorm-Baseline-6e4" \
+    --wandb_project "assignment-post-norm" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 6e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+
+# ==============================================================================
+# PART 5: RoPE vs. NoPE (No Positional Embeddings)
+# Objective: Determine the impact of removing positional information entirely.
+# Expectation: Without RoPE, the model becomes a "Bag of Words" (permutation 
+# invariant within the causal mask). Performance should degrade significantly.
+# ==============================================================================
+
+# 5a. The Experiment: NoPE (No Positional Embeddings)
+# We use the modified run_NoPE.py here.
+# "----------------------------------------------------------------"
+# "Starting Part 5a: NoPE Training"
+# "----------------------------------------------------------------"
+python run_NoPE.py \
+    --device cuda \
+    --exp_name "NoPE-3e3" \
+    --wandb_project "assignment-nope" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# 5b. The Baseline: RoPE (Standard)
+# We use the standard run.py (which uses RoPE) with identical settings.
+# "----------------------------------------------------------------"
+# "Starting Part 5b: RoPE Baseline"
+# "----------------------------------------------------------------"
+python run.py \
+    --device cuda \
+    --exp_name "RoPE-Baseline-3e3" \
+    --wandb_project "assignment-nope" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# ==============================================================================
+# PART 6: SwiGLU vs. SiLU Ablation
+# Objective: Compare the performance of Gated (SwiGLU) vs Non-Gated (SiLU) FFNs
+# with matched parameter counts.
+# ==============================================================================
+
+# 6a. SwiGLU Baseline (Standard Run)
+# Uses the original run.py (SwiGLU is default)
+# "----------------------------------------------------------------"
+# "Starting SwiGLU Baseline (Gated)"
+# "----------------------------------------------------------------"
+python run.py \
+    --device cuda \
+    --exp_name "SwiGLU-Baseline" \
+    --wandb_project "swiglu-ablation" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# 6b. SiLU Variant (No Gate)
+# Uses the new run_SiLU.py
+# "----------------------------------------------------------------"
+# "Starting SiLU Variant (Non-Gated)"
+# "----------------------------------------------------------------"
+python run_SiLU.py \
+    --device cuda \
+    --exp_name "SiLU-Variant" \
+    --wandb_project "swiglu-ablation" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+
+
+# ==============================================================================
+# PART 6: TinyStories vs Open Web Text, up to Vocab size of 50K
+# ==============================================================================
+
+
+# ==============================================================================
+# STEP 1: TinyStories Baseline
+# ==============================================================================
+
+python run.py \
+    --device cuda \
+    --exp_name "TinyStories-Optimal-3e3" \
+    --wandb_project "dataset-comparison" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --vocab_size 50304 \
+    --d_model 512 \
+    --d_ff 1344 \
+    --num_layers 4 \
+    --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+
+# ==============================================================================
+# STEP 2: OpenWebText Experiment
+# ==============================================================================
+
+python run.py \
+    --device cuda \
+    --exp_name "OWT-Optimal-3e3" \
+    --wandb_project "dataset-comparison" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 5000 \
+    --lr 3e-3 \
+    --min_lr 3e-4 \
+    --vocab_size 50304 \
+    --d_model 512 \
+    --d_ff 1344 \
+    --num_layers 4 \
+    --num_heads 16 \
+    --rope_theta 10000 \
+    --train_data ../data/owt_train.bin \
+    --val_data ../data/owt_valid.bin
+
+
+
+#!/bin/bash
+
+# ==============================================================================
+# PART 8: Full Dataset Training (1 Epoch)
+# Comparison of convergence on Low vs High Entropy data over a full pass.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. TinyStories - Full Epoch
+# Duration: ~20-30 minutes
+# Steps: 34,000 (Covers ~557M tokens)
+# ------------------------------------------------------------------------------
+echo "----------------------------------------------------------------"
+echo "Starting TinyStories Full Epoch (34k steps)"
+echo "----------------------------------------------------------------"
+python run.py \
+    --device cuda \
+    --exp_name "TinyStories-Full-1Epoch" \
+    --wandb_project "dataset-full-run-comparison" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 34000 \
+    --cosine_cycle_iters 34000 \
+    --warmup_iters 500 \
+    --lr 3e-3 \
+    --min_lr 3e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/TinyStoriesV2-GPT4-train.bin \
+    --val_data ../data/TinyStoriesV2-GPT4-valid.bin
+
+# ------------------------------------------------------------------------------
+# 2. OpenWebText - Full Epoch
+# Duration: ~1.5 - 2.0 Hours
+# Steps: 180,300 (Covers ~2.95B tokens)
+# WARNING: Requires ~5.5GB Free Disk Space for binary generation.
+# ------------------------------------------------------------------------------
+echo "----------------------------------------------------------------"
+echo "Starting OpenWebText Full Epoch (180k steps)"
+echo "----------------------------------------------------------------"
+python run.py \
+    --device cuda \
+    --exp_name "OWT-Full-1Epoch" \
+    --wandb_project "dataset-full-run-comparison" \
+    --batch_size 64 \
+    --context_length 256 \
+    --max_iters 180300 \
+    --cosine_cycle_iters 180300 \
+    --warmup_iters 2000 \
+    --lr 3e-3 \
+    --min_lr 3e-4 \
+    --vocab_size 50304 \
+    --d_model 512 --d_ff 1344 --num_layers 4 --num_heads 16 \
+    --train_data ../data/owt_train.bin \
+    --val_data ../data/owt_valid.bin

@@ -1,0 +1,1148 @@
+Using device: cuda
+Generating ../data/TinyStoriesV2-GPT4-train.bin from ../data/TinyStoriesV2-GPT4-train.txt...
+Data preparation complete. Saved to ../data/TinyStoriesV2-GPT4-train.bin.
+Generating ../data/TinyStoriesV2-GPT4-valid.bin from ../data/TinyStoriesV2-GPT4-valid.txt...
+Data preparation complete. Saved to ../data/TinyStoriesV2-GPT4-valid.bin.
+Compiling model...
+ -> Model compiled (Standard)
+Starting training on cuda...
+Iter     0/10000 | Loss: 84.0053 | Time: 10.3s | Speed: 3276800 tok/s
+Iter    10/10000 | Loss: 84.0885 | Time: 10.9s | Speed: 538661 tok/s
+Iter    20/10000 | Loss: 83.4287 | Time: 11.5s | Speed: 540831 tok/s
+Iter    30/10000 | Loss: 82.5525 | Time: 12.1s | Speed: 540294 tok/s
+Iter    40/10000 | Loss: 81.3004 | Time: 12.7s | Speed: 539362 tok/s
+Iter    50/10000 | Loss: 79.6815 | Time: 13.3s | Speed: 541093 tok/s
+Iter    60/10000 | Loss: 77.6067 | Time: 13.9s | Speed: 541110 tok/s
+Iter    70/10000 | Loss: 74.5448 | Time: 14.5s | Speed: 539025 tok/s
+Iter    80/10000 | Loss: 71.0833 | Time: 15.1s | Speed: 543258 tok/s
+Iter    90/10000 | Loss: 66.7021 | Time: 15.7s | Speed: 541701 tok/s
+Iter   100/10000 | Loss: 62.3206 | Time: 16.4s | Speed: 539628 tok/s
+Iter   110/10000 | Loss: 57.0828 | Time: 17.0s | Speed: 541158 tok/s
+Iter   120/10000 | Loss: 50.4323 | Time: 17.6s | Speed: 543246 tok/s
+Iter   130/10000 | Loss: 40.9434 | Time: 18.2s | Speed: 543113 tok/s
+Iter   140/10000 | Loss: 29.8410 | Time: 18.8s | Speed: 539282 tok/s
+Iter   150/10000 | Loss: 20.3301 | Time: 19.4s | Speed: 539190 tok/s
+Iter   160/10000 | Loss: 14.0174 | Time: 20.0s | Speed: 539954 tok/s
+Iter   170/10000 | Loss: 10.5187 | Time: 20.6s | Speed: 540356 tok/s
+Iter   180/10000 | Loss: 8.6754 | Time: 21.2s | Speed: 538332 tok/s
+Iter   190/10000 | Loss: 7.5581 | Time: 21.8s | Speed: 539975 tok/s
+Iter   200/10000 | Loss: 6.8764 | Time: 22.4s | Speed: 542753 tok/s
+Iter   210/10000 | Loss: 6.4254 | Time: 23.0s | Speed: 540362 tok/s
+Iter   220/10000 | Loss: 6.0316 | Time: 23.6s | Speed: 541283 tok/s
+Iter   230/10000 | Loss: 5.7644 | Time: 24.2s | Speed: 540719 tok/s
+Iter   240/10000 | Loss: 5.6997 | Time: 24.8s | Speed: 541209 tok/s
+Iter   250/10000 | Loss: 5.5084 | Time: 25.4s | Speed: 541414 tok/s
+
+[VALIDATION] Iter 250: Loss 5.4730
+
+Iter   260/10000 | Loss: 5.4736 | Time: 32.9s | Speed: 44218 tok/s
+Iter   270/10000 | Loss: 5.3303 | Time: 33.5s | Speed: 540860 tok/s
+Iter   280/10000 | Loss: 5.1662 | Time: 34.1s | Speed: 540924 tok/s
+Iter   290/10000 | Loss: 5.1518 | Time: 34.7s | Speed: 540461 tok/s
+Iter   300/10000 | Loss: 5.0993 | Time: 35.3s | Speed: 540992 tok/s
+Iter   310/10000 | Loss: 5.0577 | Time: 35.9s | Speed: 541547 tok/s
+Iter   320/10000 | Loss: 4.9826 | Time: 36.5s | Speed: 543236 tok/s
+Iter   330/10000 | Loss: 4.9646 | Time: 37.1s | Speed: 539696 tok/s
+Iter   340/10000 | Loss: 4.8452 | Time: 37.7s | Speed: 542931 tok/s
+Iter   350/10000 | Loss: 4.7421 | Time: 38.3s | Speed: 541760 tok/s
+Iter   360/10000 | Loss: 4.7511 | Time: 38.9s | Speed: 540949 tok/s
+Iter   370/10000 | Loss: 4.7602 | Time: 39.5s | Speed: 541421 tok/s
+Iter   380/10000 | Loss: 4.7759 | Time: 40.1s | Speed: 541739 tok/s
+Iter   390/10000 | Loss: 4.6242 | Time: 40.7s | Speed: 542023 tok/s
+Iter   400/10000 | Loss: 4.5972 | Time: 41.3s | Speed: 541470 tok/s
+Iter   410/10000 | Loss: 4.5796 | Time: 41.9s | Speed: 541121 tok/s
+Iter   420/10000 | Loss: 4.5269 | Time: 42.5s | Speed: 540732 tok/s
+Iter   430/10000 | Loss: 4.4592 | Time: 43.1s | Speed: 541099 tok/s
+Iter   440/10000 | Loss: 4.4639 | Time: 43.7s | Speed: 542571 tok/s
+Iter   450/10000 | Loss: 4.4484 | Time: 44.4s | Speed: 540086 tok/s
+Iter   460/10000 | Loss: 4.3956 | Time: 45.0s | Speed: 540962 tok/s
+Iter   470/10000 | Loss: 4.3915 | Time: 45.6s | Speed: 538153 tok/s
+Iter   480/10000 | Loss: 4.3027 | Time: 46.2s | Speed: 539270 tok/s
+Iter   490/10000 | Loss: 4.3153 | Time: 46.8s | Speed: 541283 tok/s
+Iter   500/10000 | Loss: 4.3316 | Time: 47.4s | Speed: 541330 tok/s
+
+[VALIDATION] Iter 500: Loss 4.3058
+
+Iter   510/10000 | Loss: 4.2491 | Time: 50.2s | Speed: 116385 tok/s
+Iter   520/10000 | Loss: 4.1934 | Time: 50.8s | Speed: 541153 tok/s
+Iter   530/10000 | Loss: 4.2402 | Time: 51.4s | Speed: 539063 tok/s
+Iter   540/10000 | Loss: 4.2191 | Time: 52.0s | Speed: 540707 tok/s
+Iter   550/10000 | Loss: 4.2168 | Time: 52.6s | Speed: 540761 tok/s
+Iter   560/10000 | Loss: 4.2165 | Time: 53.2s | Speed: 539084 tok/s
+Iter   570/10000 | Loss: 4.1613 | Time: 53.8s | Speed: 540423 tok/s
+Iter   580/10000 | Loss: 4.1617 | Time: 54.4s | Speed: 541276 tok/s
+Iter   590/10000 | Loss: 4.1231 | Time: 55.1s | Speed: 539247 tok/s
+Iter   600/10000 | Loss: 4.1461 | Time: 55.7s | Speed: 539308 tok/s
+Iter   610/10000 | Loss: 4.0311 | Time: 56.3s | Speed: 542408 tok/s
+Iter   620/10000 | Loss: 4.0508 | Time: 56.9s | Speed: 539772 tok/s
+Iter   630/10000 | Loss: 4.0552 | Time: 57.5s | Speed: 540797 tok/s
+Iter   640/10000 | Loss: 4.0861 | Time: 58.1s | Speed: 542746 tok/s
+Iter   650/10000 | Loss: 4.0120 | Time: 58.7s | Speed: 540066 tok/s
+Iter   660/10000 | Loss: 4.0607 | Time: 59.3s | Speed: 540598 tok/s
+Iter   670/10000 | Loss: 4.0075 | Time: 59.9s | Speed: 540911 tok/s
+Iter   680/10000 | Loss: 3.9974 | Time: 60.5s | Speed: 542442 tok/s
+Iter   690/10000 | Loss: 4.0786 | Time: 61.1s | Speed: 539361 tok/s
+Iter   700/10000 | Loss: 3.9449 | Time: 61.7s | Speed: 540007 tok/s
+Iter   710/10000 | Loss: 4.0268 | Time: 62.3s | Speed: 540442 tok/s
+Iter   720/10000 | Loss: 3.9674 | Time: 62.9s | Speed: 540341 tok/s
+Iter   730/10000 | Loss: 3.8950 | Time: 63.5s | Speed: 539466 tok/s
+Iter   740/10000 | Loss: 3.9851 | Time: 64.1s | Speed: 542361 tok/s
+Iter   750/10000 | Loss: 3.9504 | Time: 64.7s | Speed: 542077 tok/s
+
+[VALIDATION] Iter 750: Loss 3.9287
+
+Iter   760/10000 | Loss: 3.8936 | Time: 67.6s | Speed: 115657 tok/s
+Iter   770/10000 | Loss: 3.8947 | Time: 68.2s | Speed: 540350 tok/s
+Iter   780/10000 | Loss: 3.7852 | Time: 68.8s | Speed: 539509 tok/s
+Iter   790/10000 | Loss: 3.9495 | Time: 69.4s | Speed: 540543 tok/s
+Iter   800/10000 | Loss: 3.8770 | Time: 70.0s | Speed: 541814 tok/s
+Iter   810/10000 | Loss: 3.8804 | Time: 70.6s | Speed: 537382 tok/s
+Iter   820/10000 | Loss: 3.8042 | Time: 71.2s | Speed: 540704 tok/s
+Iter   830/10000 | Loss: 3.8286 | Time: 71.8s | Speed: 541664 tok/s
+Iter   840/10000 | Loss: 3.9168 | Time: 72.4s | Speed: 538665 tok/s
+Iter   850/10000 | Loss: 3.8597 | Time: 73.0s | Speed: 540141 tok/s
+Iter   860/10000 | Loss: 3.8361 | Time: 73.6s | Speed: 541559 tok/s
+Iter   870/10000 | Loss: 3.7511 | Time: 74.3s | Speed: 539432 tok/s
+Iter   880/10000 | Loss: 3.8348 | Time: 74.9s | Speed: 539758 tok/s
+Iter   890/10000 | Loss: 3.7467 | Time: 75.5s | Speed: 540006 tok/s
+Iter   900/10000 | Loss: 3.7594 | Time: 76.1s | Speed: 539749 tok/s
+Iter   910/10000 | Loss: 3.8101 | Time: 76.7s | Speed: 540314 tok/s
+Iter   920/10000 | Loss: 3.7940 | Time: 77.3s | Speed: 542424 tok/s
+Iter   930/10000 | Loss: 3.7800 | Time: 77.9s | Speed: 540434 tok/s
+Iter   940/10000 | Loss: 3.7472 | Time: 78.5s | Speed: 540410 tok/s
+Iter   950/10000 | Loss: 3.7372 | Time: 79.1s | Speed: 542412 tok/s
+Iter   960/10000 | Loss: 3.7182 | Time: 79.7s | Speed: 541815 tok/s
+Iter   970/10000 | Loss: 3.7851 | Time: 80.3s | Speed: 540627 tok/s
+Iter   980/10000 | Loss: 3.7124 | Time: 80.9s | Speed: 540047 tok/s
+Iter   990/10000 | Loss: 3.6492 | Time: 81.5s | Speed: 542143 tok/s
+Iter  1000/10000 | Loss: 3.7611 | Time: 82.1s | Speed: 539622 tok/s
+
+[VALIDATION] Iter 1000: Loss 3.7001
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  1010/10000 | Loss: 3.7480 | Time: 86.0s | Speed: 84627 tok/s
+Iter  1020/10000 | Loss: 3.6754 | Time: 86.6s | Speed: 540222 tok/s
+Iter  1030/10000 | Loss: 3.6214 | Time: 87.2s | Speed: 540837 tok/s
+Iter  1040/10000 | Loss: 3.6191 | Time: 87.8s | Speed: 541357 tok/s
+Iter  1050/10000 | Loss: 3.6717 | Time: 88.4s | Speed: 542004 tok/s
+Iter  1060/10000 | Loss: 3.6193 | Time: 89.0s | Speed: 539042 tok/s
+Iter  1070/10000 | Loss: 3.6257 | Time: 89.6s | Speed: 540227 tok/s
+Iter  1080/10000 | Loss: 3.6390 | Time: 90.2s | Speed: 541940 tok/s
+Iter  1090/10000 | Loss: 3.6591 | Time: 90.9s | Speed: 540112 tok/s
+Iter  1100/10000 | Loss: 3.5757 | Time: 91.5s | Speed: 538892 tok/s
+Iter  1110/10000 | Loss: 3.5830 | Time: 92.1s | Speed: 542399 tok/s
+Iter  1120/10000 | Loss: 3.5910 | Time: 92.7s | Speed: 539017 tok/s
+Iter  1130/10000 | Loss: 3.5663 | Time: 93.3s | Speed: 538789 tok/s
+Iter  1140/10000 | Loss: 3.6571 | Time: 93.9s | Speed: 542727 tok/s
+Iter  1150/10000 | Loss: 3.5847 | Time: 94.5s | Speed: 538309 tok/s
+Iter  1160/10000 | Loss: 3.5992 | Time: 95.1s | Speed: 539340 tok/s
+Iter  1170/10000 | Loss: 3.5791 | Time: 95.7s | Speed: 542280 tok/s
+Iter  1180/10000 | Loss: 3.6231 | Time: 96.3s | Speed: 539634 tok/s
+Iter  1190/10000 | Loss: 3.6236 | Time: 96.9s | Speed: 539465 tok/s
+Iter  1200/10000 | Loss: 3.5866 | Time: 97.5s | Speed: 541183 tok/s
+Iter  1210/10000 | Loss: 3.6459 | Time: 98.1s | Speed: 540880 tok/s
+Iter  1220/10000 | Loss: 3.6183 | Time: 98.7s | Speed: 539500 tok/s
+Iter  1230/10000 | Loss: 3.5155 | Time: 99.3s | Speed: 541837 tok/s
+Iter  1240/10000 | Loss: 3.5375 | Time: 99.9s | Speed: 542007 tok/s
+Iter  1250/10000 | Loss: 3.4685 | Time: 100.6s | Speed: 539285 tok/s
+
+[VALIDATION] Iter 1250: Loss 3.5438
+
+Iter  1260/10000 | Loss: 3.6085 | Time: 103.4s | Speed: 115787 tok/s
+Iter  1270/10000 | Loss: 3.5266 | Time: 104.0s | Speed: 539334 tok/s
+Iter  1280/10000 | Loss: 3.5796 | Time: 104.6s | Speed: 537940 tok/s
+Iter  1290/10000 | Loss: 3.6081 | Time: 105.2s | Speed: 541733 tok/s
+Iter  1300/10000 | Loss: 3.5910 | Time: 105.8s | Speed: 538736 tok/s
+Iter  1310/10000 | Loss: 3.4976 | Time: 106.4s | Speed: 539843 tok/s
+Iter  1320/10000 | Loss: 3.4632 | Time: 107.0s | Speed: 542560 tok/s
+Iter  1330/10000 | Loss: 3.4786 | Time: 107.6s | Speed: 541165 tok/s
+Iter  1340/10000 | Loss: 3.4537 | Time: 108.2s | Speed: 539667 tok/s
+Iter  1350/10000 | Loss: 3.4721 | Time: 108.8s | Speed: 542399 tok/s
+Iter  1360/10000 | Loss: 3.4658 | Time: 109.4s | Speed: 542450 tok/s
+Iter  1370/10000 | Loss: 3.4083 | Time: 110.1s | Speed: 540309 tok/s
+Iter  1380/10000 | Loss: 3.4697 | Time: 110.7s | Speed: 540237 tok/s
+Iter  1390/10000 | Loss: 3.5042 | Time: 111.3s | Speed: 543608 tok/s
+Iter  1400/10000 | Loss: 3.4520 | Time: 111.9s | Speed: 542136 tok/s
+Iter  1410/10000 | Loss: 3.4814 | Time: 112.5s | Speed: 540094 tok/s
+Iter  1420/10000 | Loss: 3.4511 | Time: 113.1s | Speed: 539948 tok/s
+Iter  1430/10000 | Loss: 3.5016 | Time: 113.7s | Speed: 542771 tok/s
+Iter  1440/10000 | Loss: 3.5182 | Time: 114.3s | Speed: 539594 tok/s
+Iter  1450/10000 | Loss: 3.4418 | Time: 114.9s | Speed: 539944 tok/s
+Iter  1460/10000 | Loss: 3.5186 | Time: 115.5s | Speed: 543164 tok/s
+Iter  1470/10000 | Loss: 3.4843 | Time: 116.1s | Speed: 541851 tok/s
+Iter  1480/10000 | Loss: 3.4701 | Time: 116.7s | Speed: 539915 tok/s
+Iter  1490/10000 | Loss: 3.4835 | Time: 117.3s | Speed: 539664 tok/s
+Iter  1500/10000 | Loss: 3.4157 | Time: 117.9s | Speed: 541740 tok/s
+
+[VALIDATION] Iter 1500: Loss 3.4213
+
+Iter  1510/10000 | Loss: 3.4830 | Time: 120.8s | Speed: 115814 tok/s
+Iter  1520/10000 | Loss: 3.3836 | Time: 121.4s | Speed: 540672 tok/s
+Iter  1530/10000 | Loss: 3.3544 | Time: 122.0s | Speed: 542217 tok/s
+Iter  1540/10000 | Loss: 3.4633 | Time: 122.6s | Speed: 540555 tok/s
+Iter  1550/10000 | Loss: 3.3780 | Time: 123.2s | Speed: 539655 tok/s
+Iter  1560/10000 | Loss: 3.4270 | Time: 123.8s | Speed: 542173 tok/s
+Iter  1570/10000 | Loss: 3.3078 | Time: 124.4s | Speed: 540799 tok/s
+Iter  1580/10000 | Loss: 3.4606 | Time: 125.0s | Speed: 539822 tok/s
+Iter  1590/10000 | Loss: 3.3728 | Time: 125.6s | Speed: 540095 tok/s
+Iter  1600/10000 | Loss: 3.3733 | Time: 126.2s | Speed: 542378 tok/s
+Iter  1610/10000 | Loss: 3.3785 | Time: 126.8s | Speed: 540040 tok/s
+Iter  1620/10000 | Loss: 3.4050 | Time: 127.4s | Speed: 539673 tok/s
+Iter  1630/10000 | Loss: 3.3601 | Time: 128.0s | Speed: 540935 tok/s
+Iter  1640/10000 | Loss: 3.3125 | Time: 128.6s | Speed: 537824 tok/s
+Iter  1650/10000 | Loss: 3.3260 | Time: 129.2s | Speed: 539780 tok/s
+Iter  1660/10000 | Loss: 3.3775 | Time: 129.8s | Speed: 541981 tok/s
+Iter  1670/10000 | Loss: 3.3598 | Time: 130.5s | Speed: 539039 tok/s
+Iter  1680/10000 | Loss: 3.4134 | Time: 131.1s | Speed: 539579 tok/s
+Iter  1690/10000 | Loss: 3.4300 | Time: 131.7s | Speed: 539949 tok/s
+Iter  1700/10000 | Loss: 3.3653 | Time: 132.3s | Speed: 537608 tok/s
+Iter  1710/10000 | Loss: 3.3082 | Time: 132.9s | Speed: 541384 tok/s
+Iter  1720/10000 | Loss: 3.3010 | Time: 133.5s | Speed: 540197 tok/s
+Iter  1730/10000 | Loss: 3.3386 | Time: 134.1s | Speed: 538197 tok/s
+Iter  1740/10000 | Loss: 3.3184 | Time: 134.7s | Speed: 541334 tok/s
+Iter  1750/10000 | Loss: 3.2985 | Time: 135.3s | Speed: 538749 tok/s
+
+[VALIDATION] Iter 1750: Loss 3.3104
+
+Iter  1760/10000 | Loss: 3.3058 | Time: 138.1s | Speed: 115789 tok/s
+Iter  1770/10000 | Loss: 3.3538 | Time: 138.7s | Speed: 539665 tok/s
+Iter  1780/10000 | Loss: 3.3532 | Time: 139.4s | Speed: 538504 tok/s
+Iter  1790/10000 | Loss: 3.3006 | Time: 140.0s | Speed: 542441 tok/s
+Iter  1800/10000 | Loss: 3.3489 | Time: 140.6s | Speed: 542131 tok/s
+Iter  1810/10000 | Loss: 3.3394 | Time: 141.2s | Speed: 538960 tok/s
+Iter  1820/10000 | Loss: 3.2267 | Time: 141.8s | Speed: 540335 tok/s
+Iter  1830/10000 | Loss: 3.2884 | Time: 142.4s | Speed: 541245 tok/s
+Iter  1840/10000 | Loss: 3.2541 | Time: 143.0s | Speed: 538936 tok/s
+Iter  1850/10000 | Loss: 3.2407 | Time: 143.6s | Speed: 539797 tok/s
+Iter  1860/10000 | Loss: 3.3159 | Time: 144.2s | Speed: 540447 tok/s
+Iter  1870/10000 | Loss: 3.2305 | Time: 144.8s | Speed: 537892 tok/s
+Iter  1880/10000 | Loss: 3.2396 | Time: 145.4s | Speed: 541011 tok/s
+Iter  1890/10000 | Loss: 3.2947 | Time: 146.0s | Speed: 540024 tok/s
+Iter  1900/10000 | Loss: 3.1953 | Time: 146.6s | Speed: 537777 tok/s
+Iter  1910/10000 | Loss: 3.2759 | Time: 147.2s | Speed: 542024 tok/s
+Iter  1920/10000 | Loss: 3.2308 | Time: 147.8s | Speed: 541769 tok/s
+Iter  1930/10000 | Loss: 3.2579 | Time: 148.5s | Speed: 538907 tok/s
+Iter  1940/10000 | Loss: 3.2184 | Time: 149.1s | Speed: 541229 tok/s
+Iter  1950/10000 | Loss: 3.3316 | Time: 149.7s | Speed: 540008 tok/s
+Iter  1960/10000 | Loss: 3.2284 | Time: 150.3s | Speed: 539133 tok/s
+Iter  1970/10000 | Loss: 3.2362 | Time: 150.9s | Speed: 541182 tok/s
+Iter  1980/10000 | Loss: 3.2698 | Time: 151.5s | Speed: 540011 tok/s
+Iter  1990/10000 | Loss: 3.2752 | Time: 152.1s | Speed: 538678 tok/s
+Iter  2000/10000 | Loss: 3.1781 | Time: 152.7s | Speed: 541029 tok/s
+
+[VALIDATION] Iter 2000: Loss 3.2136
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  2010/10000 | Loss: 3.2233 | Time: 156.6s | Speed: 84128 tok/s
+Iter  2020/10000 | Loss: 3.1274 | Time: 157.2s | Speed: 540981 tok/s
+Iter  2030/10000 | Loss: 3.1885 | Time: 157.8s | Speed: 541036 tok/s
+Iter  2040/10000 | Loss: 3.1846 | Time: 158.4s | Speed: 538815 tok/s
+Iter  2050/10000 | Loss: 3.1800 | Time: 159.0s | Speed: 541320 tok/s
+Iter  2060/10000 | Loss: 3.2334 | Time: 159.6s | Speed: 541445 tok/s
+Iter  2070/10000 | Loss: 3.1832 | Time: 160.2s | Speed: 538461 tok/s
+Iter  2080/10000 | Loss: 3.1633 | Time: 160.8s | Speed: 540688 tok/s
+Iter  2090/10000 | Loss: 3.2143 | Time: 161.4s | Speed: 541612 tok/s
+Iter  2100/10000 | Loss: 3.1510 | Time: 162.1s | Speed: 538669 tok/s
+Iter  2110/10000 | Loss: 3.1385 | Time: 162.7s | Speed: 540704 tok/s
+Iter  2120/10000 | Loss: 3.2086 | Time: 163.3s | Speed: 541395 tok/s
+Iter  2130/10000 | Loss: 3.1813 | Time: 163.9s | Speed: 539726 tok/s
+Iter  2140/10000 | Loss: 3.1862 | Time: 164.5s | Speed: 539711 tok/s
+Iter  2150/10000 | Loss: 3.2061 | Time: 165.1s | Speed: 541527 tok/s
+Iter  2160/10000 | Loss: 3.1308 | Time: 165.7s | Speed: 539578 tok/s
+Iter  2170/10000 | Loss: 3.1438 | Time: 166.3s | Speed: 539704 tok/s
+Iter  2180/10000 | Loss: 3.1183 | Time: 166.9s | Speed: 541018 tok/s
+Iter  2190/10000 | Loss: 3.1342 | Time: 167.5s | Speed: 539104 tok/s
+Iter  2200/10000 | Loss: 3.1335 | Time: 168.1s | Speed: 539307 tok/s
+Iter  2210/10000 | Loss: 3.2056 | Time: 168.7s | Speed: 539681 tok/s
+Iter  2220/10000 | Loss: 3.1506 | Time: 169.3s | Speed: 538202 tok/s
+Iter  2230/10000 | Loss: 3.0675 | Time: 169.9s | Speed: 541131 tok/s
+Iter  2240/10000 | Loss: 3.0580 | Time: 170.5s | Speed: 539913 tok/s
+Iter  2250/10000 | Loss: 3.1184 | Time: 171.2s | Speed: 539306 tok/s
+
+[VALIDATION] Iter 2250: Loss 3.1277
+
+Iter  2260/10000 | Loss: 3.1166 | Time: 174.0s | Speed: 115625 tok/s
+Iter  2270/10000 | Loss: 3.1377 | Time: 174.6s | Speed: 538492 tok/s
+Iter  2280/10000 | Loss: 3.0684 | Time: 175.2s | Speed: 540635 tok/s
+Iter  2290/10000 | Loss: 3.1610 | Time: 175.8s | Speed: 539058 tok/s
+Iter  2300/10000 | Loss: 3.1357 | Time: 176.4s | Speed: 539884 tok/s
+Iter  2310/10000 | Loss: 3.1335 | Time: 177.0s | Speed: 541615 tok/s
+Iter  2320/10000 | Loss: 3.1757 | Time: 177.6s | Speed: 540145 tok/s
+Iter  2330/10000 | Loss: 3.1185 | Time: 178.2s | Speed: 539280 tok/s
+Iter  2340/10000 | Loss: 3.0680 | Time: 178.8s | Speed: 540481 tok/s
+Iter  2350/10000 | Loss: 3.0560 | Time: 179.5s | Speed: 538696 tok/s
+Iter  2360/10000 | Loss: 3.0494 | Time: 180.1s | Speed: 539959 tok/s
+Iter  2370/10000 | Loss: 3.1302 | Time: 180.7s | Speed: 541124 tok/s
+Iter  2380/10000 | Loss: 3.1267 | Time: 181.3s | Speed: 537455 tok/s
+Iter  2390/10000 | Loss: 3.1002 | Time: 181.9s | Speed: 541161 tok/s
+Iter  2400/10000 | Loss: 3.0062 | Time: 182.5s | Speed: 541142 tok/s
+Iter  2410/10000 | Loss: 3.0496 | Time: 183.1s | Speed: 539584 tok/s
+Iter  2420/10000 | Loss: 3.0830 | Time: 183.7s | Speed: 540406 tok/s
+Iter  2430/10000 | Loss: 3.0690 | Time: 184.3s | Speed: 540434 tok/s
+Iter  2440/10000 | Loss: 3.0465 | Time: 184.9s | Speed: 539399 tok/s
+Iter  2450/10000 | Loss: 3.0693 | Time: 185.5s | Speed: 539917 tok/s
+Iter  2460/10000 | Loss: 3.0679 | Time: 186.1s | Speed: 541270 tok/s
+Iter  2470/10000 | Loss: 3.0894 | Time: 186.7s | Speed: 538133 tok/s
+Iter  2480/10000 | Loss: 3.0430 | Time: 187.3s | Speed: 541305 tok/s
+Iter  2490/10000 | Loss: 3.0506 | Time: 187.9s | Speed: 541114 tok/s
+Iter  2500/10000 | Loss: 3.0300 | Time: 188.6s | Speed: 538794 tok/s
+
+[VALIDATION] Iter 2500: Loss 3.0536
+
+Iter  2510/10000 | Loss: 2.9983 | Time: 191.4s | Speed: 115745 tok/s
+Iter  2520/10000 | Loss: 3.0921 | Time: 192.0s | Speed: 539608 tok/s
+Iter  2530/10000 | Loss: 3.0625 | Time: 192.6s | Speed: 539774 tok/s
+Iter  2540/10000 | Loss: 3.0625 | Time: 193.2s | Speed: 541248 tok/s
+Iter  2550/10000 | Loss: 3.0040 | Time: 193.8s | Speed: 538506 tok/s
+Iter  2560/10000 | Loss: 3.0434 | Time: 194.4s | Speed: 539925 tok/s
+Iter  2570/10000 | Loss: 3.0602 | Time: 195.0s | Speed: 534873 tok/s
+Iter  2580/10000 | Loss: 3.0631 | Time: 195.6s | Speed: 539400 tok/s
+Iter  2590/10000 | Loss: 3.0320 | Time: 196.2s | Speed: 539536 tok/s
+Iter  2600/10000 | Loss: 3.0240 | Time: 196.9s | Speed: 537938 tok/s
+Iter  2610/10000 | Loss: 3.0141 | Time: 197.5s | Speed: 540026 tok/s
+Iter  2620/10000 | Loss: 2.9724 | Time: 198.1s | Speed: 539907 tok/s
+Iter  2630/10000 | Loss: 3.0073 | Time: 198.7s | Speed: 538774 tok/s
+Iter  2640/10000 | Loss: 3.0080 | Time: 199.3s | Speed: 541626 tok/s
+Iter  2650/10000 | Loss: 2.9906 | Time: 199.9s | Speed: 538718 tok/s
+Iter  2660/10000 | Loss: 2.9829 | Time: 200.5s | Speed: 539811 tok/s
+Iter  2670/10000 | Loss: 3.0490 | Time: 201.1s | Speed: 541550 tok/s
+Iter  2680/10000 | Loss: 2.9486 | Time: 201.7s | Speed: 538719 tok/s
+Iter  2690/10000 | Loss: 3.0701 | Time: 202.3s | Speed: 539490 tok/s
+Iter  2700/10000 | Loss: 2.9667 | Time: 202.9s | Speed: 540872 tok/s
+Iter  2710/10000 | Loss: 3.0278 | Time: 203.5s | Speed: 538099 tok/s
+Iter  2720/10000 | Loss: 3.0179 | Time: 204.1s | Speed: 540643 tok/s
+Iter  2730/10000 | Loss: 3.0204 | Time: 204.7s | Speed: 541481 tok/s
+Iter  2740/10000 | Loss: 2.9820 | Time: 205.4s | Speed: 538855 tok/s
+Iter  2750/10000 | Loss: 3.0610 | Time: 206.0s | Speed: 540412 tok/s
+
+[VALIDATION] Iter 2750: Loss 2.9894
+
+Iter  2760/10000 | Loss: 3.0142 | Time: 208.8s | Speed: 115508 tok/s
+Iter  2770/10000 | Loss: 3.0218 | Time: 209.4s | Speed: 537456 tok/s
+Iter  2780/10000 | Loss: 2.9668 | Time: 210.0s | Speed: 537506 tok/s
+Iter  2790/10000 | Loss: 2.9752 | Time: 210.6s | Speed: 541662 tok/s
+Iter  2800/10000 | Loss: 2.9576 | Time: 211.2s | Speed: 540663 tok/s
+Iter  2810/10000 | Loss: 2.9202 | Time: 211.8s | Speed: 539111 tok/s
+Iter  2820/10000 | Loss: 2.9273 | Time: 212.4s | Speed: 540840 tok/s
+Iter  2830/10000 | Loss: 3.0098 | Time: 213.0s | Speed: 540964 tok/s
+Iter  2840/10000 | Loss: 2.9336 | Time: 213.7s | Speed: 539214 tok/s
+Iter  2850/10000 | Loss: 2.9555 | Time: 214.3s | Speed: 539749 tok/s
+Iter  2860/10000 | Loss: 2.9655 | Time: 214.9s | Speed: 540913 tok/s
+Iter  2870/10000 | Loss: 2.9608 | Time: 215.5s | Speed: 539346 tok/s
+Iter  2880/10000 | Loss: 2.9453 | Time: 216.1s | Speed: 540798 tok/s
+Iter  2890/10000 | Loss: 3.0346 | Time: 216.7s | Speed: 540960 tok/s
+Iter  2900/10000 | Loss: 2.9690 | Time: 217.3s | Speed: 538640 tok/s
+Iter  2910/10000 | Loss: 3.0520 | Time: 217.9s | Speed: 540986 tok/s
+Iter  2920/10000 | Loss: 2.8933 | Time: 218.5s | Speed: 541646 tok/s
+Iter  2930/10000 | Loss: 2.9202 | Time: 219.1s | Speed: 538845 tok/s
+Iter  2940/10000 | Loss: 2.9613 | Time: 219.7s | Speed: 539995 tok/s
+Iter  2950/10000 | Loss: 2.9423 | Time: 220.3s | Speed: 540298 tok/s
+Iter  2960/10000 | Loss: 2.9151 | Time: 220.9s | Speed: 538537 tok/s
+Iter  2970/10000 | Loss: 2.9031 | Time: 221.5s | Speed: 541214 tok/s
+Iter  2980/10000 | Loss: 2.9327 | Time: 222.1s | Speed: 541564 tok/s
+Iter  2990/10000 | Loss: 2.9331 | Time: 222.8s | Speed: 539439 tok/s
+Iter  3000/10000 | Loss: 2.8632 | Time: 223.4s | Speed: 539644 tok/s
+
+[VALIDATION] Iter 3000: Loss 2.9059
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  3010/10000 | Loss: 2.9219 | Time: 227.3s | Speed: 84238 tok/s
+Iter  3020/10000 | Loss: 2.8653 | Time: 227.9s | Speed: 537867 tok/s
+Iter  3030/10000 | Loss: 2.9909 | Time: 228.5s | Speed: 540511 tok/s
+Iter  3040/10000 | Loss: 2.9113 | Time: 229.1s | Speed: 536598 tok/s
+Iter  3050/10000 | Loss: 2.9686 | Time: 229.7s | Speed: 540532 tok/s
+Iter  3060/10000 | Loss: 2.9539 | Time: 230.3s | Speed: 538964 tok/s
+Iter  3070/10000 | Loss: 2.8844 | Time: 230.9s | Speed: 538213 tok/s
+Iter  3080/10000 | Loss: 2.9660 | Time: 231.5s | Speed: 540115 tok/s
+Iter  3090/10000 | Loss: 2.8732 | Time: 232.1s | Speed: 537096 tok/s
+Iter  3100/10000 | Loss: 2.9338 | Time: 232.7s | Speed: 540846 tok/s
+Iter  3110/10000 | Loss: 2.8939 | Time: 233.3s | Speed: 538831 tok/s
+Iter  3120/10000 | Loss: 2.8355 | Time: 233.9s | Speed: 538336 tok/s
+Iter  3130/10000 | Loss: 2.8092 | Time: 234.5s | Speed: 540569 tok/s
+Iter  3140/10000 | Loss: 2.8477 | Time: 235.2s | Speed: 536418 tok/s
+Iter  3150/10000 | Loss: 2.9828 | Time: 235.8s | Speed: 540472 tok/s
+Iter  3160/10000 | Loss: 2.8418 | Time: 236.4s | Speed: 539242 tok/s
+Iter  3170/10000 | Loss: 2.8975 | Time: 237.0s | Speed: 537568 tok/s
+Iter  3180/10000 | Loss: 2.8877 | Time: 237.6s | Speed: 540739 tok/s
+Iter  3190/10000 | Loss: 2.8510 | Time: 238.2s | Speed: 539046 tok/s
+Iter  3200/10000 | Loss: 2.8841 | Time: 238.8s | Speed: 538796 tok/s
+Iter  3210/10000 | Loss: 2.8867 | Time: 239.4s | Speed: 540114 tok/s
+Iter  3220/10000 | Loss: 2.9209 | Time: 240.0s | Speed: 537280 tok/s
+Iter  3230/10000 | Loss: 2.8339 | Time: 240.6s | Speed: 540978 tok/s
+Iter  3240/10000 | Loss: 2.8301 | Time: 241.2s | Speed: 538723 tok/s
+Iter  3250/10000 | Loss: 2.8681 | Time: 241.8s | Speed: 538597 tok/s
+
+[VALIDATION] Iter 3250: Loss 2.8548
+
+Iter  3260/10000 | Loss: 2.8494 | Time: 244.7s | Speed: 115422 tok/s
+Iter  3270/10000 | Loss: 2.8700 | Time: 245.3s | Speed: 539695 tok/s
+Iter  3280/10000 | Loss: 2.9266 | Time: 245.9s | Speed: 537441 tok/s
+Iter  3290/10000 | Loss: 2.8012 | Time: 246.5s | Speed: 540452 tok/s
+Iter  3300/10000 | Loss: 2.8886 | Time: 247.1s | Speed: 538436 tok/s
+Iter  3310/10000 | Loss: 2.8852 | Time: 247.7s | Speed: 536763 tok/s
+Iter  3320/10000 | Loss: 2.8783 | Time: 248.3s | Speed: 539480 tok/s
+Iter  3330/10000 | Loss: 2.8705 | Time: 248.9s | Speed: 537620 tok/s
+Iter  3340/10000 | Loss: 2.8646 | Time: 249.5s | Speed: 539893 tok/s
+Iter  3350/10000 | Loss: 2.8554 | Time: 250.2s | Speed: 538502 tok/s
+Iter  3360/10000 | Loss: 2.8984 | Time: 250.8s | Speed: 539387 tok/s
+Iter  3370/10000 | Loss: 2.7989 | Time: 251.4s | Speed: 538398 tok/s
+Iter  3380/10000 | Loss: 2.8554 | Time: 252.0s | Speed: 537305 tok/s
+Iter  3390/10000 | Loss: 2.7522 | Time: 252.6s | Speed: 541144 tok/s
+Iter  3400/10000 | Loss: 2.7937 | Time: 253.2s | Speed: 539144 tok/s
+Iter  3410/10000 | Loss: 2.8111 | Time: 253.8s | Speed: 539228 tok/s
+Iter  3420/10000 | Loss: 2.8032 | Time: 254.4s | Speed: 540715 tok/s
+Iter  3430/10000 | Loss: 2.7866 | Time: 255.0s | Speed: 537396 tok/s
+Iter  3440/10000 | Loss: 2.8208 | Time: 255.6s | Speed: 541466 tok/s
+Iter  3450/10000 | Loss: 2.8628 | Time: 256.2s | Speed: 540319 tok/s
+Iter  3460/10000 | Loss: 2.7957 | Time: 256.8s | Speed: 537918 tok/s
+Iter  3470/10000 | Loss: 2.8148 | Time: 257.4s | Speed: 540866 tok/s
+Iter  3480/10000 | Loss: 2.7679 | Time: 258.1s | Speed: 539495 tok/s
+Iter  3490/10000 | Loss: 2.8289 | Time: 258.7s | Speed: 537959 tok/s
+Iter  3500/10000 | Loss: 2.8943 | Time: 259.3s | Speed: 540761 tok/s
+
+[VALIDATION] Iter 3500: Loss 2.7977
+
+Iter  3510/10000 | Loss: 2.8214 | Time: 262.1s | Speed: 115427 tok/s
+Iter  3520/10000 | Loss: 2.8188 | Time: 262.7s | Speed: 538653 tok/s
+Iter  3530/10000 | Loss: 2.7677 | Time: 263.3s | Speed: 538734 tok/s
+Iter  3540/10000 | Loss: 2.7330 | Time: 263.9s | Speed: 540971 tok/s
+Iter  3550/10000 | Loss: 2.7863 | Time: 264.5s | Speed: 537844 tok/s
+Iter  3560/10000 | Loss: 2.7330 | Time: 265.1s | Speed: 540452 tok/s
+Iter  3570/10000 | Loss: 2.8124 | Time: 265.8s | Speed: 538647 tok/s
+Iter  3580/10000 | Loss: 2.8790 | Time: 266.4s | Speed: 538148 tok/s
+Iter  3590/10000 | Loss: 2.7974 | Time: 267.0s | Speed: 541054 tok/s
+Iter  3600/10000 | Loss: 2.8006 | Time: 267.6s | Speed: 539082 tok/s
+Iter  3610/10000 | Loss: 2.8066 | Time: 268.2s | Speed: 538738 tok/s
+Iter  3620/10000 | Loss: 2.7844 | Time: 268.8s | Speed: 541032 tok/s
+Iter  3630/10000 | Loss: 2.7678 | Time: 269.4s | Speed: 538227 tok/s
+Iter  3640/10000 | Loss: 2.7568 | Time: 270.0s | Speed: 540362 tok/s
+Iter  3650/10000 | Loss: 2.8036 | Time: 270.6s | Speed: 538387 tok/s
+Iter  3660/10000 | Loss: 2.7633 | Time: 271.2s | Speed: 538006 tok/s
+Iter  3670/10000 | Loss: 2.7891 | Time: 271.8s | Speed: 540095 tok/s
+Iter  3680/10000 | Loss: 2.6840 | Time: 272.4s | Speed: 537365 tok/s
+Iter  3690/10000 | Loss: 2.7925 | Time: 273.0s | Speed: 540185 tok/s
+Iter  3700/10000 | Loss: 2.7868 | Time: 273.7s | Speed: 538482 tok/s
+Iter  3710/10000 | Loss: 2.7611 | Time: 274.3s | Speed: 537327 tok/s
+Iter  3720/10000 | Loss: 2.7181 | Time: 274.9s | Speed: 540876 tok/s
+Iter  3730/10000 | Loss: 2.7487 | Time: 275.5s | Speed: 537509 tok/s
+Iter  3740/10000 | Loss: 2.7748 | Time: 276.1s | Speed: 540794 tok/s
+Iter  3750/10000 | Loss: 2.7439 | Time: 276.7s | Speed: 539365 tok/s
+
+[VALIDATION] Iter 3750: Loss 2.7495
+
+Iter  3760/10000 | Loss: 2.7827 | Time: 279.5s | Speed: 115345 tok/s
+Iter  3770/10000 | Loss: 2.7198 | Time: 280.1s | Speed: 538160 tok/s
+Iter  3780/10000 | Loss: 2.7929 | Time: 280.7s | Speed: 541212 tok/s
+Iter  3790/10000 | Loss: 2.7150 | Time: 281.4s | Speed: 538052 tok/s
+Iter  3800/10000 | Loss: 2.7899 | Time: 282.0s | Speed: 539387 tok/s
+Iter  3810/10000 | Loss: 2.7768 | Time: 282.6s | Speed: 540607 tok/s
+Iter  3820/10000 | Loss: 2.7853 | Time: 283.2s | Speed: 537254 tok/s
+Iter  3830/10000 | Loss: 2.7773 | Time: 283.8s | Speed: 541192 tok/s
+Iter  3840/10000 | Loss: 2.7522 | Time: 284.4s | Speed: 539425 tok/s
+Iter  3850/10000 | Loss: 2.6713 | Time: 285.0s | Speed: 537916 tok/s
+Iter  3860/10000 | Loss: 2.7672 | Time: 285.6s | Speed: 540574 tok/s
+Iter  3870/10000 | Loss: 2.7145 | Time: 286.2s | Speed: 537393 tok/s
+Iter  3880/10000 | Loss: 2.7621 | Time: 286.8s | Speed: 540513 tok/s
+Iter  3890/10000 | Loss: 2.7624 | Time: 287.4s | Speed: 540622 tok/s
+Iter  3900/10000 | Loss: 2.6993 | Time: 288.0s | Speed: 537260 tok/s
+Iter  3910/10000 | Loss: 2.7598 | Time: 288.6s | Speed: 540329 tok/s
+Iter  3920/10000 | Loss: 2.6719 | Time: 289.3s | Speed: 537527 tok/s
+Iter  3930/10000 | Loss: 2.6742 | Time: 289.9s | Speed: 539917 tok/s
+Iter  3940/10000 | Loss: 2.7550 | Time: 290.5s | Speed: 539899 tok/s
+Iter  3950/10000 | Loss: 2.7114 | Time: 291.1s | Speed: 537153 tok/s
+Iter  3960/10000 | Loss: 2.7045 | Time: 291.7s | Speed: 541134 tok/s
+Iter  3970/10000 | Loss: 2.7583 | Time: 292.3s | Speed: 539085 tok/s
+Iter  3980/10000 | Loss: 2.6900 | Time: 292.9s | Speed: 537196 tok/s
+Iter  3990/10000 | Loss: 2.6839 | Time: 293.5s | Speed: 540519 tok/s
+Iter  4000/10000 | Loss: 2.7035 | Time: 294.1s | Speed: 537413 tok/s
+
+[VALIDATION] Iter 4000: Loss 2.6966
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  4010/10000 | Loss: 2.6671 | Time: 298.0s | Speed: 83941 tok/s
+Iter  4020/10000 | Loss: 2.7116 | Time: 298.6s | Speed: 540929 tok/s
+Iter  4030/10000 | Loss: 2.6631 | Time: 299.2s | Speed: 537343 tok/s
+Iter  4040/10000 | Loss: 2.6914 | Time: 299.8s | Speed: 541605 tok/s
+Iter  4050/10000 | Loss: 2.6912 | Time: 300.5s | Speed: 540075 tok/s
+Iter  4060/10000 | Loss: 2.6738 | Time: 301.1s | Speed: 537485 tok/s
+Iter  4070/10000 | Loss: 2.6694 | Time: 301.7s | Speed: 541126 tok/s
+Iter  4080/10000 | Loss: 2.6556 | Time: 302.3s | Speed: 539484 tok/s
+Iter  4090/10000 | Loss: 2.6835 | Time: 302.9s | Speed: 538585 tok/s
+Iter  4100/10000 | Loss: 2.7317 | Time: 303.5s | Speed: 541120 tok/s
+Iter  4110/10000 | Loss: 2.7227 | Time: 304.1s | Speed: 531870 tok/s
+Iter  4120/10000 | Loss: 2.6692 | Time: 304.7s | Speed: 533633 tok/s
+Iter  4130/10000 | Loss: 2.6679 | Time: 305.3s | Speed: 528832 tok/s
+Iter  4140/10000 | Loss: 2.6766 | Time: 306.0s | Speed: 530801 tok/s
+Iter  4150/10000 | Loss: 2.6936 | Time: 306.6s | Speed: 530234 tok/s
+Iter  4160/10000 | Loss: 2.6965 | Time: 307.2s | Speed: 527539 tok/s
+Iter  4170/10000 | Loss: 2.6719 | Time: 307.8s | Speed: 530017 tok/s
+Iter  4180/10000 | Loss: 2.6810 | Time: 308.4s | Speed: 533561 tok/s
+Iter  4190/10000 | Loss: 2.6489 | Time: 309.0s | Speed: 532007 tok/s
+Iter  4200/10000 | Loss: 2.6396 | Time: 309.6s | Speed: 541517 tok/s
+Iter  4210/10000 | Loss: 2.6413 | Time: 310.3s | Speed: 538593 tok/s
+Iter  4220/10000 | Loss: 2.7093 | Time: 310.9s | Speed: 539808 tok/s
+Iter  4230/10000 | Loss: 2.5959 | Time: 311.5s | Speed: 540992 tok/s
+Iter  4240/10000 | Loss: 2.6831 | Time: 312.1s | Speed: 538772 tok/s
+Iter  4250/10000 | Loss: 2.6878 | Time: 312.7s | Speed: 540422 tok/s
+
+[VALIDATION] Iter 4250: Loss 2.6595
+
+Iter  4260/10000 | Loss: 2.7214 | Time: 315.5s | Speed: 115421 tok/s
+Iter  4270/10000 | Loss: 2.6312 | Time: 316.1s | Speed: 541556 tok/s
+Iter  4280/10000 | Loss: 2.7042 | Time: 316.7s | Speed: 540487 tok/s
+Iter  4290/10000 | Loss: 2.6214 | Time: 317.3s | Speed: 538300 tok/s
+Iter  4300/10000 | Loss: 2.6486 | Time: 317.9s | Speed: 541934 tok/s
+Iter  4310/10000 | Loss: 2.7112 | Time: 318.6s | Speed: 539507 tok/s
+Iter  4320/10000 | Loss: 2.6464 | Time: 319.2s | Speed: 538665 tok/s
+Iter  4330/10000 | Loss: 2.6657 | Time: 319.8s | Speed: 542173 tok/s
+Iter  4340/10000 | Loss: 2.5834 | Time: 320.4s | Speed: 539936 tok/s
+Iter  4350/10000 | Loss: 2.6049 | Time: 321.0s | Speed: 538525 tok/s
+Iter  4360/10000 | Loss: 2.6593 | Time: 321.6s | Speed: 540760 tok/s
+Iter  4370/10000 | Loss: 2.6270 | Time: 322.2s | Speed: 539439 tok/s
+Iter  4380/10000 | Loss: 2.6182 | Time: 322.8s | Speed: 539529 tok/s
+Iter  4390/10000 | Loss: 2.6303 | Time: 323.4s | Speed: 541956 tok/s
+Iter  4400/10000 | Loss: 2.6573 | Time: 324.0s | Speed: 538574 tok/s
+Iter  4410/10000 | Loss: 2.6211 | Time: 324.6s | Speed: 539062 tok/s
+Iter  4420/10000 | Loss: 2.6627 | Time: 325.2s | Speed: 539574 tok/s
+Iter  4430/10000 | Loss: 2.6295 | Time: 325.8s | Speed: 539088 tok/s
+Iter  4440/10000 | Loss: 2.6604 | Time: 326.4s | Speed: 539536 tok/s
+Iter  4450/10000 | Loss: 2.6470 | Time: 327.1s | Speed: 540693 tok/s
+Iter  4460/10000 | Loss: 2.6440 | Time: 327.7s | Speed: 538937 tok/s
+Iter  4470/10000 | Loss: 2.5995 | Time: 328.3s | Speed: 542039 tok/s
+Iter  4480/10000 | Loss: 2.6048 | Time: 328.9s | Speed: 541532 tok/s
+Iter  4490/10000 | Loss: 2.6050 | Time: 329.5s | Speed: 539369 tok/s
+Iter  4500/10000 | Loss: 2.6147 | Time: 330.1s | Speed: 540301 tok/s
+
+[VALIDATION] Iter 4500: Loss 2.6161
+
+Iter  4510/10000 | Loss: 2.5668 | Time: 332.9s | Speed: 115435 tok/s
+Iter  4520/10000 | Loss: 2.6649 | Time: 333.5s | Speed: 541547 tok/s
+Iter  4530/10000 | Loss: 2.6750 | Time: 334.1s | Speed: 540244 tok/s
+Iter  4540/10000 | Loss: 2.5950 | Time: 334.7s | Speed: 538885 tok/s
+Iter  4550/10000 | Loss: 2.6066 | Time: 335.3s | Speed: 542221 tok/s
+Iter  4560/10000 | Loss: 2.6384 | Time: 336.0s | Speed: 539841 tok/s
+Iter  4570/10000 | Loss: 2.6515 | Time: 336.6s | Speed: 538530 tok/s
+Iter  4580/10000 | Loss: 2.6883 | Time: 337.2s | Speed: 542028 tok/s
+Iter  4590/10000 | Loss: 2.6493 | Time: 337.8s | Speed: 539772 tok/s
+Iter  4600/10000 | Loss: 2.7136 | Time: 338.4s | Speed: 537884 tok/s
+Iter  4610/10000 | Loss: 2.6598 | Time: 339.0s | Speed: 542111 tok/s
+Iter  4620/10000 | Loss: 2.5988 | Time: 339.6s | Speed: 540128 tok/s
+Iter  4630/10000 | Loss: 2.5447 | Time: 340.2s | Speed: 538402 tok/s
+Iter  4640/10000 | Loss: 2.5872 | Time: 340.8s | Speed: 542454 tok/s
+Iter  4650/10000 | Loss: 2.5444 | Time: 341.4s | Speed: 539803 tok/s
+Iter  4660/10000 | Loss: 2.5706 | Time: 342.0s | Speed: 538602 tok/s
+Iter  4670/10000 | Loss: 2.6186 | Time: 342.6s | Speed: 541914 tok/s
+Iter  4680/10000 | Loss: 2.6081 | Time: 343.2s | Speed: 540019 tok/s
+Iter  4690/10000 | Loss: 2.6305 | Time: 343.8s | Speed: 538366 tok/s
+Iter  4700/10000 | Loss: 2.5169 | Time: 344.4s | Speed: 541931 tok/s
+Iter  4710/10000 | Loss: 2.6414 | Time: 345.1s | Speed: 539866 tok/s
+Iter  4720/10000 | Loss: 2.5778 | Time: 345.7s | Speed: 538920 tok/s
+Iter  4730/10000 | Loss: 2.5973 | Time: 346.3s | Speed: 542254 tok/s
+Iter  4740/10000 | Loss: 2.5722 | Time: 346.9s | Speed: 541437 tok/s
+Iter  4750/10000 | Loss: 2.5377 | Time: 347.5s | Speed: 538242 tok/s
+
+[VALIDATION] Iter 4750: Loss 2.5785
+
+Iter  4760/10000 | Loss: 2.6215 | Time: 350.3s | Speed: 115398 tok/s
+Iter  4770/10000 | Loss: 2.5990 | Time: 350.9s | Speed: 541368 tok/s
+Iter  4780/10000 | Loss: 2.5990 | Time: 351.5s | Speed: 541257 tok/s
+Iter  4790/10000 | Loss: 2.5665 | Time: 352.1s | Speed: 538767 tok/s
+Iter  4800/10000 | Loss: 2.5932 | Time: 352.7s | Speed: 540901 tok/s
+Iter  4810/10000 | Loss: 2.6153 | Time: 353.3s | Speed: 541518 tok/s
+Iter  4820/10000 | Loss: 2.5907 | Time: 354.0s | Speed: 538551 tok/s
+Iter  4830/10000 | Loss: 2.6057 | Time: 354.6s | Speed: 540366 tok/s
+Iter  4840/10000 | Loss: 2.6420 | Time: 355.2s | Speed: 541715 tok/s
+Iter  4850/10000 | Loss: 2.5519 | Time: 355.8s | Speed: 537432 tok/s
+Iter  4860/10000 | Loss: 2.5678 | Time: 356.4s | Speed: 540579 tok/s
+Iter  4870/10000 | Loss: 2.5394 | Time: 357.0s | Speed: 541859 tok/s
+Iter  4880/10000 | Loss: 2.5992 | Time: 357.6s | Speed: 539256 tok/s
+Iter  4890/10000 | Loss: 2.5518 | Time: 358.2s | Speed: 540196 tok/s
+Iter  4900/10000 | Loss: 2.5376 | Time: 358.8s | Speed: 541098 tok/s
+Iter  4910/10000 | Loss: 2.5825 | Time: 359.4s | Speed: 537203 tok/s
+Iter  4920/10000 | Loss: 2.5341 | Time: 360.0s | Speed: 541296 tok/s
+Iter  4930/10000 | Loss: 2.6023 | Time: 360.6s | Speed: 540934 tok/s
+Iter  4940/10000 | Loss: 2.5545 | Time: 361.2s | Speed: 538716 tok/s
+Iter  4950/10000 | Loss: 2.4961 | Time: 361.8s | Speed: 540950 tok/s
+Iter  4960/10000 | Loss: 2.5871 | Time: 362.4s | Speed: 542295 tok/s
+Iter  4970/10000 | Loss: 2.5058 | Time: 363.1s | Speed: 539080 tok/s
+Iter  4980/10000 | Loss: 2.5111 | Time: 363.7s | Speed: 539882 tok/s
+Iter  4990/10000 | Loss: 2.5618 | Time: 364.3s | Speed: 541638 tok/s
+Iter  5000/10000 | Loss: 2.4629 | Time: 364.9s | Speed: 537703 tok/s
+
+[VALIDATION] Iter 5000: Loss 2.5441
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  5010/10000 | Loss: 2.5554 | Time: 372.6s | Speed: 42387 tok/s
+Iter  5020/10000 | Loss: 2.5535 | Time: 373.2s | Speed: 538877 tok/s
+Iter  5030/10000 | Loss: 2.5414 | Time: 373.8s | Speed: 540169 tok/s
+Iter  5040/10000 | Loss: 2.5501 | Time: 374.4s | Speed: 537750 tok/s
+Iter  5050/10000 | Loss: 2.5887 | Time: 375.0s | Speed: 537968 tok/s
+Iter  5060/10000 | Loss: 2.5656 | Time: 375.6s | Speed: 540752 tok/s
+Iter  5070/10000 | Loss: 2.4965 | Time: 376.3s | Speed: 538575 tok/s
+Iter  5080/10000 | Loss: 2.5593 | Time: 376.9s | Speed: 538931 tok/s
+Iter  5090/10000 | Loss: 2.5828 | Time: 377.5s | Speed: 540762 tok/s
+Iter  5100/10000 | Loss: 2.4845 | Time: 378.1s | Speed: 538195 tok/s
+Iter  5110/10000 | Loss: 2.5293 | Time: 378.7s | Speed: 541269 tok/s
+Iter  5120/10000 | Loss: 2.5164 | Time: 379.3s | Speed: 541174 tok/s
+Iter  5130/10000 | Loss: 2.4988 | Time: 379.9s | Speed: 537714 tok/s
+Iter  5140/10000 | Loss: 2.5474 | Time: 380.5s | Speed: 540855 tok/s
+Iter  5150/10000 | Loss: 2.5110 | Time: 381.1s | Speed: 540930 tok/s
+Iter  5160/10000 | Loss: 2.5210 | Time: 381.7s | Speed: 537681 tok/s
+Iter  5170/10000 | Loss: 2.5802 | Time: 382.3s | Speed: 541267 tok/s
+Iter  5180/10000 | Loss: 2.5425 | Time: 382.9s | Speed: 540639 tok/s
+Iter  5190/10000 | Loss: 2.5548 | Time: 383.5s | Speed: 538344 tok/s
+Iter  5200/10000 | Loss: 2.5033 | Time: 384.1s | Speed: 540975 tok/s
+Iter  5210/10000 | Loss: 2.5682 | Time: 384.8s | Speed: 539673 tok/s
+Iter  5220/10000 | Loss: 2.4871 | Time: 385.4s | Speed: 538283 tok/s
+Iter  5230/10000 | Loss: 2.4757 | Time: 386.0s | Speed: 540704 tok/s
+Iter  5240/10000 | Loss: 2.5183 | Time: 386.6s | Speed: 539277 tok/s
+Iter  5250/10000 | Loss: 2.5336 | Time: 387.2s | Speed: 538210 tok/s
+
+[VALIDATION] Iter 5250: Loss 2.5140
+
+Iter  5260/10000 | Loss: 2.5241 | Time: 390.0s | Speed: 115243 tok/s
+Iter  5270/10000 | Loss: 2.5134 | Time: 390.6s | Speed: 538031 tok/s
+Iter  5280/10000 | Loss: 2.5255 | Time: 391.2s | Speed: 539393 tok/s
+Iter  5290/10000 | Loss: 2.4767 | Time: 391.8s | Speed: 541465 tok/s
+Iter  5300/10000 | Loss: 2.4840 | Time: 392.5s | Speed: 539001 tok/s
+Iter  5310/10000 | Loss: 2.4913 | Time: 393.1s | Speed: 540503 tok/s
+Iter  5320/10000 | Loss: 2.5201 | Time: 393.7s | Speed: 541663 tok/s
+Iter  5330/10000 | Loss: 2.5213 | Time: 394.3s | Speed: 540132 tok/s
+Iter  5340/10000 | Loss: 2.5070 | Time: 394.9s | Speed: 539570 tok/s
+Iter  5350/10000 | Loss: 2.4573 | Time: 395.5s | Speed: 541899 tok/s
+Iter  5360/10000 | Loss: 2.5525 | Time: 396.1s | Speed: 540035 tok/s
+Iter  5370/10000 | Loss: 2.4508 | Time: 396.7s | Speed: 538654 tok/s
+Iter  5380/10000 | Loss: 2.5301 | Time: 397.3s | Speed: 542460 tok/s
+Iter  5390/10000 | Loss: 2.5549 | Time: 397.9s | Speed: 539935 tok/s
+Iter  5400/10000 | Loss: 2.5029 | Time: 398.5s | Speed: 538710 tok/s
+Iter  5410/10000 | Loss: 2.4734 | Time: 399.1s | Speed: 542131 tok/s
+Iter  5420/10000 | Loss: 2.4615 | Time: 399.7s | Speed: 540881 tok/s
+Iter  5430/10000 | Loss: 2.5138 | Time: 400.3s | Speed: 538510 tok/s
+Iter  5440/10000 | Loss: 2.4722 | Time: 400.9s | Speed: 542474 tok/s
+Iter  5450/10000 | Loss: 2.4968 | Time: 401.5s | Speed: 541893 tok/s
+Iter  5460/10000 | Loss: 2.5284 | Time: 402.2s | Speed: 538860 tok/s
+Iter  5470/10000 | Loss: 2.4686 | Time: 402.8s | Speed: 539638 tok/s
+Iter  5480/10000 | Loss: 2.5450 | Time: 403.4s | Speed: 542204 tok/s
+Iter  5490/10000 | Loss: 2.4835 | Time: 404.0s | Speed: 538480 tok/s
+Iter  5500/10000 | Loss: 2.5092 | Time: 404.6s | Speed: 539939 tok/s
+
+[VALIDATION] Iter 5500: Loss 2.4946
+
+Iter  5510/10000 | Loss: 2.4228 | Time: 407.4s | Speed: 115358 tok/s
+Iter  5520/10000 | Loss: 2.5050 | Time: 408.0s | Speed: 539970 tok/s
+Iter  5530/10000 | Loss: 2.4826 | Time: 408.6s | Speed: 537832 tok/s
+Iter  5540/10000 | Loss: 2.5216 | Time: 409.2s | Speed: 541469 tok/s
+Iter  5550/10000 | Loss: 2.5261 | Time: 409.9s | Speed: 539786 tok/s
+Iter  5560/10000 | Loss: 2.5377 | Time: 410.5s | Speed: 539004 tok/s
+Iter  5570/10000 | Loss: 2.4695 | Time: 411.1s | Speed: 542468 tok/s
+Iter  5580/10000 | Loss: 2.4591 | Time: 411.7s | Speed: 541251 tok/s
+Iter  5590/10000 | Loss: 2.4560 | Time: 412.3s | Speed: 538405 tok/s
+Iter  5600/10000 | Loss: 2.4807 | Time: 412.9s | Speed: 541388 tok/s
+Iter  5610/10000 | Loss: 2.4596 | Time: 413.5s | Speed: 541716 tok/s
+Iter  5620/10000 | Loss: 2.4740 | Time: 414.1s | Speed: 539349 tok/s
+Iter  5630/10000 | Loss: 2.4558 | Time: 414.7s | Speed: 540222 tok/s
+Iter  5640/10000 | Loss: 2.5111 | Time: 415.3s | Speed: 541156 tok/s
+Iter  5650/10000 | Loss: 2.4999 | Time: 415.9s | Speed: 538622 tok/s
+Iter  5660/10000 | Loss: 2.4928 | Time: 416.5s | Speed: 540068 tok/s
+Iter  5670/10000 | Loss: 2.4877 | Time: 417.1s | Speed: 541060 tok/s
+Iter  5680/10000 | Loss: 2.4993 | Time: 417.7s | Speed: 538110 tok/s
+Iter  5690/10000 | Loss: 2.4668 | Time: 418.3s | Speed: 540755 tok/s
+Iter  5700/10000 | Loss: 2.5730 | Time: 418.9s | Speed: 541847 tok/s
+Iter  5710/10000 | Loss: 2.4649 | Time: 419.6s | Speed: 538325 tok/s
+Iter  5720/10000 | Loss: 2.4761 | Time: 420.2s | Speed: 540567 tok/s
+Iter  5730/10000 | Loss: 2.4308 | Time: 420.8s | Speed: 541085 tok/s
+Iter  5740/10000 | Loss: 2.4865 | Time: 421.4s | Speed: 538244 tok/s
+Iter  5750/10000 | Loss: 2.5624 | Time: 422.0s | Speed: 540119 tok/s
+
+[VALIDATION] Iter 5750: Loss 2.4575
+
+Iter  5760/10000 | Loss: 2.5269 | Time: 424.8s | Speed: 114991 tok/s
+Iter  5770/10000 | Loss: 2.4360 | Time: 425.4s | Speed: 538266 tok/s
+Iter  5780/10000 | Loss: 2.4244 | Time: 426.0s | Speed: 540602 tok/s
+Iter  5790/10000 | Loss: 2.4073 | Time: 426.7s | Speed: 537470 tok/s
+Iter  5800/10000 | Loss: 2.4850 | Time: 427.3s | Speed: 539894 tok/s
+Iter  5810/10000 | Loss: 2.4580 | Time: 427.9s | Speed: 537952 tok/s
+Iter  5820/10000 | Loss: 2.4967 | Time: 428.5s | Speed: 538223 tok/s
+Iter  5830/10000 | Loss: 2.5103 | Time: 429.1s | Speed: 540835 tok/s
+Iter  5840/10000 | Loss: 2.4264 | Time: 429.7s | Speed: 536678 tok/s
+Iter  5850/10000 | Loss: 2.4356 | Time: 430.3s | Speed: 541554 tok/s
+Iter  5860/10000 | Loss: 2.4209 | Time: 430.9s | Speed: 539312 tok/s
+Iter  5870/10000 | Loss: 2.4458 | Time: 431.5s | Speed: 537946 tok/s
+Iter  5880/10000 | Loss: 2.4221 | Time: 432.1s | Speed: 541597 tok/s
+Iter  5890/10000 | Loss: 2.4273 | Time: 432.7s | Speed: 539310 tok/s
+Iter  5900/10000 | Loss: 2.4844 | Time: 433.3s | Speed: 538511 tok/s
+Iter  5910/10000 | Loss: 2.5035 | Time: 433.9s | Speed: 541446 tok/s
+Iter  5920/10000 | Loss: 2.4496 | Time: 434.6s | Speed: 537930 tok/s
+Iter  5930/10000 | Loss: 2.3961 | Time: 435.2s | Speed: 540003 tok/s
+Iter  5940/10000 | Loss: 2.4734 | Time: 435.8s | Speed: 541290 tok/s
+Iter  5950/10000 | Loss: 2.4177 | Time: 436.4s | Speed: 537753 tok/s
+Iter  5960/10000 | Loss: 2.4575 | Time: 437.0s | Speed: 540575 tok/s
+Iter  5970/10000 | Loss: 2.5016 | Time: 437.6s | Speed: 540377 tok/s
+Iter  5980/10000 | Loss: 2.4889 | Time: 438.2s | Speed: 537724 tok/s
+Iter  5990/10000 | Loss: 2.4700 | Time: 438.8s | Speed: 540833 tok/s
+Iter  6000/10000 | Loss: 2.4371 | Time: 439.4s | Speed: 538863 tok/s
+
+[VALIDATION] Iter 6000: Loss 2.4338
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  6010/10000 | Loss: 2.4467 | Time: 447.2s | Speed: 41904 tok/s
+Iter  6020/10000 | Loss: 2.5500 | Time: 447.8s | Speed: 538015 tok/s
+Iter  6030/10000 | Loss: 2.4262 | Time: 448.5s | Speed: 539991 tok/s
+Iter  6040/10000 | Loss: 2.4243 | Time: 449.1s | Speed: 537100 tok/s
+Iter  6050/10000 | Loss: 2.4499 | Time: 449.7s | Speed: 540598 tok/s
+Iter  6060/10000 | Loss: 2.4564 | Time: 450.3s | Speed: 538598 tok/s
+Iter  6070/10000 | Loss: 2.4302 | Time: 450.9s | Speed: 537963 tok/s
+Iter  6080/10000 | Loss: 2.4504 | Time: 451.5s | Speed: 539346 tok/s
+Iter  6090/10000 | Loss: 2.4331 | Time: 452.1s | Speed: 537539 tok/s
+Iter  6100/10000 | Loss: 2.4655 | Time: 452.7s | Speed: 540371 tok/s
+Iter  6110/10000 | Loss: 2.4078 | Time: 453.3s | Speed: 537428 tok/s
+Iter  6120/10000 | Loss: 2.4549 | Time: 453.9s | Speed: 539151 tok/s
+Iter  6130/10000 | Loss: 2.4730 | Time: 454.5s | Speed: 539207 tok/s
+Iter  6140/10000 | Loss: 2.4810 | Time: 455.1s | Speed: 537278 tok/s
+Iter  6150/10000 | Loss: 2.4833 | Time: 455.7s | Speed: 540199 tok/s
+Iter  6160/10000 | Loss: 2.4637 | Time: 456.4s | Speed: 536269 tok/s
+Iter  6170/10000 | Loss: 2.4374 | Time: 457.0s | Speed: 540566 tok/s
+Iter  6180/10000 | Loss: 2.4145 | Time: 457.6s | Speed: 538338 tok/s
+Iter  6190/10000 | Loss: 2.4660 | Time: 458.2s | Speed: 537592 tok/s
+Iter  6200/10000 | Loss: 2.3247 | Time: 458.8s | Speed: 539334 tok/s
+Iter  6210/10000 | Loss: 2.4128 | Time: 459.4s | Speed: 537082 tok/s
+Iter  6220/10000 | Loss: 2.3720 | Time: 460.0s | Speed: 540259 tok/s
+Iter  6230/10000 | Loss: 2.4518 | Time: 460.6s | Speed: 537232 tok/s
+Iter  6240/10000 | Loss: 2.3754 | Time: 461.2s | Speed: 539948 tok/s
+Iter  6250/10000 | Loss: 2.4876 | Time: 461.8s | Speed: 540416 tok/s
+
+[VALIDATION] Iter 6250: Loss 2.4182
+
+Iter  6260/10000 | Loss: 2.4484 | Time: 464.7s | Speed: 115239 tok/s
+Iter  6270/10000 | Loss: 2.3967 | Time: 465.3s | Speed: 538598 tok/s
+Iter  6280/10000 | Loss: 2.4309 | Time: 465.9s | Speed: 539763 tok/s
+Iter  6290/10000 | Loss: 2.4420 | Time: 466.5s | Speed: 537934 tok/s
+Iter  6300/10000 | Loss: 2.4094 | Time: 467.1s | Speed: 541402 tok/s
+Iter  6310/10000 | Loss: 2.4187 | Time: 467.7s | Speed: 539556 tok/s
+Iter  6320/10000 | Loss: 2.4412 | Time: 468.3s | Speed: 537329 tok/s
+Iter  6330/10000 | Loss: 2.3630 | Time: 468.9s | Speed: 540806 tok/s
+Iter  6340/10000 | Loss: 2.3299 | Time: 469.5s | Speed: 538363 tok/s
+Iter  6350/10000 | Loss: 2.4225 | Time: 470.1s | Speed: 539332 tok/s
+Iter  6360/10000 | Loss: 2.3461 | Time: 470.8s | Speed: 540449 tok/s
+Iter  6370/10000 | Loss: 2.3470 | Time: 471.4s | Speed: 537475 tok/s
+Iter  6380/10000 | Loss: 2.3670 | Time: 472.0s | Speed: 541407 tok/s
+Iter  6390/10000 | Loss: 2.3903 | Time: 472.6s | Speed: 538575 tok/s
+Iter  6400/10000 | Loss: 2.4004 | Time: 473.2s | Speed: 537995 tok/s
+Iter  6410/10000 | Loss: 2.4100 | Time: 473.8s | Speed: 540931 tok/s
+Iter  6420/10000 | Loss: 2.4463 | Time: 474.4s | Speed: 537702 tok/s
+Iter  6430/10000 | Loss: 2.4625 | Time: 475.0s | Speed: 539359 tok/s
+Iter  6440/10000 | Loss: 2.3740 | Time: 475.6s | Speed: 537891 tok/s
+Iter  6450/10000 | Loss: 2.4253 | Time: 476.2s | Speed: 538222 tok/s
+Iter  6460/10000 | Loss: 2.4285 | Time: 476.8s | Speed: 539794 tok/s
+Iter  6470/10000 | Loss: 2.4093 | Time: 477.4s | Speed: 536658 tok/s
+Iter  6480/10000 | Loss: 2.3790 | Time: 478.0s | Speed: 541016 tok/s
+Iter  6490/10000 | Loss: 2.3733 | Time: 478.7s | Speed: 538567 tok/s
+Iter  6500/10000 | Loss: 2.4283 | Time: 479.3s | Speed: 538461 tok/s
+
+[VALIDATION] Iter 6500: Loss 2.3961
+
+Iter  6510/10000 | Loss: 2.3974 | Time: 482.1s | Speed: 115225 tok/s
+Iter  6520/10000 | Loss: 2.4718 | Time: 482.7s | Speed: 537175 tok/s
+Iter  6530/10000 | Loss: 2.4361 | Time: 483.3s | Speed: 539834 tok/s
+Iter  6540/10000 | Loss: 2.3968 | Time: 483.9s | Speed: 539298 tok/s
+Iter  6550/10000 | Loss: 2.3560 | Time: 484.5s | Speed: 537496 tok/s
+Iter  6560/10000 | Loss: 2.4273 | Time: 485.1s | Speed: 540656 tok/s
+Iter  6570/10000 | Loss: 2.4328 | Time: 485.8s | Speed: 536411 tok/s
+Iter  6580/10000 | Loss: 2.4488 | Time: 486.4s | Speed: 540013 tok/s
+Iter  6590/10000 | Loss: 2.3364 | Time: 487.0s | Speed: 538371 tok/s
+Iter  6600/10000 | Loss: 2.3215 | Time: 487.6s | Speed: 537543 tok/s
+Iter  6610/10000 | Loss: 2.4085 | Time: 488.2s | Speed: 539946 tok/s
+Iter  6620/10000 | Loss: 2.3961 | Time: 488.8s | Speed: 536695 tok/s
+Iter  6630/10000 | Loss: 2.3918 | Time: 489.4s | Speed: 538595 tok/s
+Iter  6640/10000 | Loss: 2.3343 | Time: 490.0s | Speed: 536636 tok/s
+Iter  6650/10000 | Loss: 2.4202 | Time: 490.6s | Speed: 539972 tok/s
+Iter  6660/10000 | Loss: 2.3737 | Time: 491.2s | Speed: 537940 tok/s
+Iter  6670/10000 | Loss: 2.3486 | Time: 491.8s | Speed: 538763 tok/s
+Iter  6680/10000 | Loss: 2.4048 | Time: 492.5s | Speed: 539327 tok/s
+Iter  6690/10000 | Loss: 2.4089 | Time: 493.1s | Speed: 537993 tok/s
+Iter  6700/10000 | Loss: 2.3575 | Time: 493.7s | Speed: 540473 tok/s
+Iter  6710/10000 | Loss: 2.3443 | Time: 494.3s | Speed: 537893 tok/s
+Iter  6720/10000 | Loss: 2.3121 | Time: 494.9s | Speed: 539040 tok/s
+Iter  6730/10000 | Loss: 2.3998 | Time: 495.5s | Speed: 539875 tok/s
+Iter  6740/10000 | Loss: 2.3751 | Time: 496.1s | Speed: 536796 tok/s
+Iter  6750/10000 | Loss: 2.3740 | Time: 496.7s | Speed: 540868 tok/s
+
+[VALIDATION] Iter 6750: Loss 2.3855
+
+Iter  6760/10000 | Loss: 2.4414 | Time: 499.6s | Speed: 115048 tok/s
+Iter  6770/10000 | Loss: 2.4216 | Time: 500.2s | Speed: 538256 tok/s
+Iter  6780/10000 | Loss: 2.3423 | Time: 500.8s | Speed: 539829 tok/s
+Iter  6790/10000 | Loss: 2.3380 | Time: 501.4s | Speed: 537145 tok/s
+Iter  6800/10000 | Loss: 2.4228 | Time: 502.0s | Speed: 540686 tok/s
+Iter  6810/10000 | Loss: 2.3662 | Time: 502.6s | Speed: 537407 tok/s
+Iter  6820/10000 | Loss: 2.3087 | Time: 503.2s | Speed: 539304 tok/s
+Iter  6830/10000 | Loss: 2.3780 | Time: 503.8s | Speed: 538907 tok/s
+Iter  6840/10000 | Loss: 2.3999 | Time: 504.4s | Speed: 537206 tok/s
+Iter  6850/10000 | Loss: 2.3894 | Time: 505.0s | Speed: 539509 tok/s
+Iter  6860/10000 | Loss: 2.3621 | Time: 505.6s | Speed: 536912 tok/s
+Iter  6870/10000 | Loss: 2.4120 | Time: 506.2s | Speed: 540668 tok/s
+Iter  6880/10000 | Loss: 2.3943 | Time: 506.9s | Speed: 537370 tok/s
+Iter  6890/10000 | Loss: 2.4037 | Time: 507.5s | Speed: 539079 tok/s
+Iter  6900/10000 | Loss: 2.4304 | Time: 508.1s | Speed: 539889 tok/s
+Iter  6910/10000 | Loss: 2.3587 | Time: 508.7s | Speed: 537017 tok/s
+Iter  6920/10000 | Loss: 2.4253 | Time: 509.3s | Speed: 539881 tok/s
+Iter  6930/10000 | Loss: 2.3886 | Time: 509.9s | Speed: 536192 tok/s
+Iter  6940/10000 | Loss: 2.3826 | Time: 510.5s | Speed: 539981 tok/s
+Iter  6950/10000 | Loss: 2.4010 | Time: 511.1s | Speed: 537292 tok/s
+Iter  6960/10000 | Loss: 2.3408 | Time: 511.7s | Speed: 538654 tok/s
+Iter  6970/10000 | Loss: 2.3740 | Time: 512.3s | Speed: 539233 tok/s
+Iter  6980/10000 | Loss: 2.3371 | Time: 512.9s | Speed: 536904 tok/s
+Iter  6990/10000 | Loss: 2.3972 | Time: 513.6s | Speed: 540459 tok/s
+Iter  7000/10000 | Loss: 2.3989 | Time: 514.2s | Speed: 536625 tok/s
+
+[VALIDATION] Iter 7000: Loss 2.3689
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  7010/10000 | Loss: 2.3654 | Time: 519.6s | Speed: 59949 tok/s
+Iter  7020/10000 | Loss: 2.3709 | Time: 520.2s | Speed: 537874 tok/s
+Iter  7030/10000 | Loss: 2.3799 | Time: 520.8s | Speed: 537025 tok/s
+Iter  7040/10000 | Loss: 2.3565 | Time: 521.5s | Speed: 539408 tok/s
+Iter  7050/10000 | Loss: 2.3871 | Time: 522.1s | Speed: 536734 tok/s
+Iter  7060/10000 | Loss: 2.3719 | Time: 522.7s | Speed: 539511 tok/s
+Iter  7070/10000 | Loss: 2.3860 | Time: 523.3s | Speed: 535737 tok/s
+Iter  7080/10000 | Loss: 2.4028 | Time: 523.9s | Speed: 537776 tok/s
+Iter  7090/10000 | Loss: 2.3441 | Time: 524.5s | Speed: 536132 tok/s
+Iter  7100/10000 | Loss: 2.3536 | Time: 525.1s | Speed: 538601 tok/s
+Iter  7110/10000 | Loss: 2.3185 | Time: 525.7s | Speed: 536112 tok/s
+Iter  7120/10000 | Loss: 2.3272 | Time: 526.3s | Speed: 540919 tok/s
+Iter  7130/10000 | Loss: 2.3338 | Time: 526.9s | Speed: 538488 tok/s
+Iter  7140/10000 | Loss: 2.3110 | Time: 527.5s | Speed: 539323 tok/s
+Iter  7150/10000 | Loss: 2.3891 | Time: 528.2s | Speed: 541084 tok/s
+Iter  7160/10000 | Loss: 2.3167 | Time: 528.8s | Speed: 536906 tok/s
+Iter  7170/10000 | Loss: 2.3301 | Time: 529.4s | Speed: 540427 tok/s
+Iter  7180/10000 | Loss: 2.3610 | Time: 530.0s | Speed: 539660 tok/s
+Iter  7190/10000 | Loss: 2.3412 | Time: 530.6s | Speed: 537835 tok/s
+Iter  7200/10000 | Loss: 2.3086 | Time: 531.2s | Speed: 541006 tok/s
+Iter  7210/10000 | Loss: 2.3169 | Time: 531.8s | Speed: 537408 tok/s
+Iter  7220/10000 | Loss: 2.3166 | Time: 532.4s | Speed: 539892 tok/s
+Iter  7230/10000 | Loss: 2.3736 | Time: 533.0s | Speed: 540326 tok/s
+Iter  7240/10000 | Loss: 2.3297 | Time: 533.6s | Speed: 536908 tok/s
+Iter  7250/10000 | Loss: 2.3155 | Time: 534.2s | Speed: 540610 tok/s
+
+[VALIDATION] Iter 7250: Loss 2.3554
+
+Iter  7260/10000 | Loss: 2.4124 | Time: 537.1s | Speed: 115147 tok/s
+Iter  7270/10000 | Loss: 2.3162 | Time: 537.7s | Speed: 536996 tok/s
+Iter  7280/10000 | Loss: 2.3832 | Time: 538.3s | Speed: 540445 tok/s
+Iter  7290/10000 | Loss: 2.3872 | Time: 538.9s | Speed: 535438 tok/s
+Iter  7300/10000 | Loss: 2.3647 | Time: 539.5s | Speed: 539906 tok/s
+Iter  7310/10000 | Loss: 2.3363 | Time: 540.1s | Speed: 536552 tok/s
+Iter  7320/10000 | Loss: 2.3579 | Time: 540.7s | Speed: 540617 tok/s
+Iter  7330/10000 | Loss: 2.3215 | Time: 541.3s | Speed: 539918 tok/s
+Iter  7340/10000 | Loss: 2.3604 | Time: 541.9s | Speed: 537353 tok/s
+Iter  7350/10000 | Loss: 2.2792 | Time: 542.5s | Speed: 540794 tok/s
+Iter  7360/10000 | Loss: 2.3077 | Time: 543.2s | Speed: 536803 tok/s
+Iter  7370/10000 | Loss: 2.3617 | Time: 543.8s | Speed: 539002 tok/s
+Iter  7380/10000 | Loss: 2.4347 | Time: 544.4s | Speed: 537850 tok/s
+Iter  7390/10000 | Loss: 2.3169 | Time: 545.0s | Speed: 538344 tok/s
+Iter  7400/10000 | Loss: 2.3977 | Time: 545.6s | Speed: 539878 tok/s
+Iter  7410/10000 | Loss: 2.3536 | Time: 546.2s | Speed: 536913 tok/s
+Iter  7420/10000 | Loss: 2.3302 | Time: 546.8s | Speed: 540355 tok/s
+Iter  7430/10000 | Loss: 2.3219 | Time: 547.4s | Speed: 536395 tok/s
+Iter  7440/10000 | Loss: 2.2921 | Time: 548.0s | Speed: 539830 tok/s
+Iter  7450/10000 | Loss: 2.3614 | Time: 548.6s | Speed: 536712 tok/s
+Iter  7460/10000 | Loss: 2.4146 | Time: 549.2s | Speed: 537936 tok/s
+Iter  7470/10000 | Loss: 2.3341 | Time: 549.9s | Speed: 538061 tok/s
+Iter  7480/10000 | Loss: 2.3434 | Time: 550.5s | Speed: 537986 tok/s
+Iter  7490/10000 | Loss: 2.3682 | Time: 551.1s | Speed: 540115 tok/s
+Iter  7500/10000 | Loss: 2.3578 | Time: 551.7s | Speed: 536531 tok/s
+
+[VALIDATION] Iter 7500: Loss 2.3358
+
+Iter  7510/10000 | Loss: 2.3966 | Time: 554.5s | Speed: 115127 tok/s
+Iter  7520/10000 | Loss: 2.3504 | Time: 555.1s | Speed: 537736 tok/s
+Iter  7530/10000 | Loss: 2.3564 | Time: 555.7s | Speed: 538914 tok/s
+Iter  7540/10000 | Loss: 2.2969 | Time: 556.4s | Speed: 539157 tok/s
+Iter  7550/10000 | Loss: 2.3026 | Time: 557.0s | Speed: 536990 tok/s
+Iter  7560/10000 | Loss: 2.3728 | Time: 557.6s | Speed: 540230 tok/s
+Iter  7570/10000 | Loss: 2.3294 | Time: 558.2s | Speed: 536384 tok/s
+Iter  7580/10000 | Loss: 2.3684 | Time: 558.8s | Speed: 540232 tok/s
+Iter  7590/10000 | Loss: 2.3715 | Time: 559.4s | Speed: 538350 tok/s
+Iter  7600/10000 | Loss: 2.3962 | Time: 560.0s | Speed: 538213 tok/s
+Iter  7610/10000 | Loss: 2.3794 | Time: 560.6s | Speed: 539615 tok/s
+Iter  7620/10000 | Loss: 2.3728 | Time: 561.2s | Speed: 536614 tok/s
+Iter  7630/10000 | Loss: 2.3941 | Time: 561.8s | Speed: 540357 tok/s
+Iter  7640/10000 | Loss: 2.2442 | Time: 562.4s | Speed: 536641 tok/s
+Iter  7650/10000 | Loss: 2.3153 | Time: 563.0s | Speed: 539757 tok/s
+Iter  7660/10000 | Loss: 2.3995 | Time: 563.7s | Speed: 538141 tok/s
+Iter  7670/10000 | Loss: 2.3158 | Time: 564.3s | Speed: 538171 tok/s
+Iter  7680/10000 | Loss: 2.3234 | Time: 564.9s | Speed: 539841 tok/s
+Iter  7690/10000 | Loss: 2.4260 | Time: 565.5s | Speed: 536485 tok/s
+Iter  7700/10000 | Loss: 2.3612 | Time: 566.1s | Speed: 540485 tok/s
+Iter  7710/10000 | Loss: 2.3274 | Time: 566.7s | Speed: 537394 tok/s
+Iter  7720/10000 | Loss: 2.3315 | Time: 567.3s | Speed: 537927 tok/s
+Iter  7730/10000 | Loss: 2.2913 | Time: 567.9s | Speed: 537460 tok/s
+Iter  7740/10000 | Loss: 2.3433 | Time: 568.5s | Speed: 539234 tok/s
+Iter  7750/10000 | Loss: 2.3751 | Time: 569.1s | Speed: 540722 tok/s
+
+[VALIDATION] Iter 7750: Loss 2.3249
+
+Iter  7760/10000 | Loss: 2.3536 | Time: 572.0s | Speed: 114899 tok/s
+Iter  7770/10000 | Loss: 2.2937 | Time: 572.6s | Speed: 540661 tok/s
+Iter  7780/10000 | Loss: 2.3697 | Time: 573.2s | Speed: 538068 tok/s
+Iter  7790/10000 | Loss: 2.3421 | Time: 573.8s | Speed: 539436 tok/s
+Iter  7800/10000 | Loss: 2.3480 | Time: 574.4s | Speed: 540107 tok/s
+Iter  7810/10000 | Loss: 2.3229 | Time: 575.0s | Speed: 536777 tok/s
+Iter  7820/10000 | Loss: 2.3105 | Time: 575.6s | Speed: 541101 tok/s
+Iter  7830/10000 | Loss: 2.2710 | Time: 576.2s | Speed: 537882 tok/s
+Iter  7840/10000 | Loss: 2.3696 | Time: 576.8s | Speed: 539277 tok/s
+Iter  7850/10000 | Loss: 2.3144 | Time: 577.5s | Speed: 541056 tok/s
+Iter  7860/10000 | Loss: 2.3177 | Time: 578.1s | Speed: 536370 tok/s
+Iter  7870/10000 | Loss: 2.3598 | Time: 578.7s | Speed: 540178 tok/s
+Iter  7880/10000 | Loss: 2.3656 | Time: 579.3s | Speed: 539194 tok/s
+Iter  7890/10000 | Loss: 2.3176 | Time: 579.9s | Speed: 538519 tok/s
+Iter  7900/10000 | Loss: 2.2913 | Time: 580.5s | Speed: 540880 tok/s
+Iter  7910/10000 | Loss: 2.2448 | Time: 581.1s | Speed: 537429 tok/s
+Iter  7920/10000 | Loss: 2.2811 | Time: 581.7s | Speed: 540697 tok/s
+Iter  7930/10000 | Loss: 2.2984 | Time: 582.3s | Speed: 539281 tok/s
+Iter  7940/10000 | Loss: 2.2815 | Time: 582.9s | Speed: 537690 tok/s
+Iter  7950/10000 | Loss: 2.3617 | Time: 583.5s | Speed: 541234 tok/s
+Iter  7960/10000 | Loss: 2.4048 | Time: 584.1s | Speed: 538413 tok/s
+Iter  7970/10000 | Loss: 2.2939 | Time: 584.7s | Speed: 538758 tok/s
+Iter  7980/10000 | Loss: 2.4004 | Time: 585.4s | Speed: 541059 tok/s
+Iter  7990/10000 | Loss: 2.3607 | Time: 586.0s | Speed: 536980 tok/s
+Iter  8000/10000 | Loss: 2.3055 | Time: 586.6s | Speed: 540596 tok/s
+
+[VALIDATION] Iter 8000: Loss 2.3239
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  8010/10000 | Loss: 2.3447 | Time: 590.5s | Speed: 83720 tok/s
+Iter  8020/10000 | Loss: 2.3853 | Time: 591.1s | Speed: 538886 tok/s
+Iter  8030/10000 | Loss: 2.3293 | Time: 591.7s | Speed: 535975 tok/s
+Iter  8040/10000 | Loss: 2.3430 | Time: 592.3s | Speed: 538978 tok/s
+Iter  8050/10000 | Loss: 2.2724 | Time: 592.9s | Speed: 535961 tok/s
+Iter  8060/10000 | Loss: 2.3757 | Time: 593.5s | Speed: 539040 tok/s
+Iter  8070/10000 | Loss: 2.2876 | Time: 594.1s | Speed: 536189 tok/s
+Iter  8080/10000 | Loss: 2.3307 | Time: 594.7s | Speed: 538548 tok/s
+Iter  8090/10000 | Loss: 2.3484 | Time: 595.4s | Speed: 535973 tok/s
+Iter  8100/10000 | Loss: 2.3632 | Time: 596.0s | Speed: 538375 tok/s
+Iter  8110/10000 | Loss: 2.3327 | Time: 596.6s | Speed: 534978 tok/s
+Iter  8120/10000 | Loss: 2.3076 | Time: 597.2s | Speed: 534872 tok/s
+Iter  8130/10000 | Loss: 2.3625 | Time: 597.8s | Speed: 535683 tok/s
+Iter  8140/10000 | Loss: 2.2987 | Time: 598.4s | Speed: 536698 tok/s
+Iter  8150/10000 | Loss: 2.3580 | Time: 599.0s | Speed: 537300 tok/s
+Iter  8160/10000 | Loss: 2.3684 | Time: 599.6s | Speed: 539054 tok/s
+Iter  8170/10000 | Loss: 2.3340 | Time: 600.2s | Speed: 536533 tok/s
+Iter  8180/10000 | Loss: 2.3647 | Time: 600.9s | Speed: 540346 tok/s
+Iter  8190/10000 | Loss: 2.3165 | Time: 601.5s | Speed: 535237 tok/s
+Iter  8200/10000 | Loss: 2.2968 | Time: 602.1s | Speed: 540139 tok/s
+Iter  8210/10000 | Loss: 2.3169 | Time: 602.7s | Speed: 536178 tok/s
+Iter  8220/10000 | Loss: 2.2882 | Time: 603.3s | Speed: 539355 tok/s
+Iter  8230/10000 | Loss: 2.3080 | Time: 603.9s | Speed: 537471 tok/s
+Iter  8240/10000 | Loss: 2.3271 | Time: 604.5s | Speed: 538096 tok/s
+Iter  8250/10000 | Loss: 2.2234 | Time: 605.1s | Speed: 538840 tok/s
+
+[VALIDATION] Iter 8250: Loss 2.3144
+
+Iter  8260/10000 | Loss: 2.2810 | Time: 608.0s | Speed: 114712 tok/s
+Iter  8270/10000 | Loss: 2.3088 | Time: 608.6s | Speed: 534831 tok/s
+Iter  8280/10000 | Loss: 2.3366 | Time: 609.2s | Speed: 538412 tok/s
+Iter  8290/10000 | Loss: 2.3242 | Time: 609.8s | Speed: 535934 tok/s
+Iter  8300/10000 | Loss: 2.2754 | Time: 610.4s | Speed: 539910 tok/s
+Iter  8310/10000 | Loss: 2.2878 | Time: 611.0s | Speed: 534154 tok/s
+Iter  8320/10000 | Loss: 2.2547 | Time: 611.6s | Speed: 537856 tok/s
+Iter  8330/10000 | Loss: 2.3389 | Time: 612.2s | Speed: 534743 tok/s
+Iter  8340/10000 | Loss: 2.3343 | Time: 612.9s | Speed: 536427 tok/s
+Iter  8350/10000 | Loss: 2.2719 | Time: 613.5s | Speed: 536440 tok/s
+Iter  8360/10000 | Loss: 2.4326 | Time: 614.1s | Speed: 533229 tok/s
+Iter  8370/10000 | Loss: 2.3289 | Time: 614.7s | Speed: 537774 tok/s
+Iter  8380/10000 | Loss: 2.3430 | Time: 615.3s | Speed: 535718 tok/s
+Iter  8390/10000 | Loss: 2.2634 | Time: 615.9s | Speed: 538979 tok/s
+Iter  8400/10000 | Loss: 2.3277 | Time: 616.5s | Speed: 534526 tok/s
+Iter  8410/10000 | Loss: 2.3074 | Time: 617.1s | Speed: 537642 tok/s
+Iter  8420/10000 | Loss: 2.2831 | Time: 617.7s | Speed: 535902 tok/s
+Iter  8430/10000 | Loss: 2.2894 | Time: 618.4s | Speed: 538815 tok/s
+Iter  8440/10000 | Loss: 2.2520 | Time: 619.0s | Speed: 534619 tok/s
+Iter  8450/10000 | Loss: 2.3354 | Time: 619.6s | Speed: 536974 tok/s
+Iter  8460/10000 | Loss: 2.3590 | Time: 620.2s | Speed: 536548 tok/s
+Iter  8470/10000 | Loss: 2.2196 | Time: 620.8s | Speed: 536514 tok/s
+Iter  8480/10000 | Loss: 2.2904 | Time: 621.4s | Speed: 537584 tok/s
+Iter  8490/10000 | Loss: 2.3051 | Time: 622.0s | Speed: 535873 tok/s
+Iter  8500/10000 | Loss: 2.2685 | Time: 622.6s | Speed: 537548 tok/s
+
+[VALIDATION] Iter 8500: Loss 2.3161
+
+Iter  8510/10000 | Loss: 2.3233 | Time: 625.5s | Speed: 114637 tok/s
+Iter  8520/10000 | Loss: 2.3345 | Time: 626.1s | Speed: 535955 tok/s
+Iter  8530/10000 | Loss: 2.2699 | Time: 626.7s | Speed: 537370 tok/s
+Iter  8540/10000 | Loss: 2.3274 | Time: 627.3s | Speed: 535262 tok/s
+Iter  8550/10000 | Loss: 2.3493 | Time: 627.9s | Speed: 538081 tok/s
+Iter  8560/10000 | Loss: 2.2852 | Time: 628.5s | Speed: 535281 tok/s
+Iter  8570/10000 | Loss: 2.2808 | Time: 629.2s | Speed: 538952 tok/s
+Iter  8580/10000 | Loss: 2.2888 | Time: 629.8s | Speed: 532965 tok/s
+Iter  8590/10000 | Loss: 2.3245 | Time: 630.4s | Speed: 538984 tok/s
+Iter  8600/10000 | Loss: 2.3034 | Time: 631.0s | Speed: 535071 tok/s
+Iter  8610/10000 | Loss: 2.2598 | Time: 631.6s | Speed: 537980 tok/s
+Iter  8620/10000 | Loss: 2.3140 | Time: 632.2s | Speed: 535669 tok/s
+Iter  8630/10000 | Loss: 2.3617 | Time: 632.8s | Speed: 537361 tok/s
+Iter  8640/10000 | Loss: 2.2427 | Time: 633.4s | Speed: 535993 tok/s
+Iter  8650/10000 | Loss: 2.2960 | Time: 634.0s | Speed: 537331 tok/s
+Iter  8660/10000 | Loss: 2.3261 | Time: 634.6s | Speed: 535097 tok/s
+Iter  8670/10000 | Loss: 2.3354 | Time: 635.3s | Speed: 534477 tok/s
+Iter  8680/10000 | Loss: 2.3602 | Time: 635.9s | Speed: 538946 tok/s
+Iter  8690/10000 | Loss: 2.2768 | Time: 636.5s | Speed: 535313 tok/s
+Iter  8700/10000 | Loss: 2.3327 | Time: 637.1s | Speed: 538568 tok/s
+Iter  8710/10000 | Loss: 2.2842 | Time: 637.7s | Speed: 535410 tok/s
+Iter  8720/10000 | Loss: 2.3430 | Time: 638.3s | Speed: 539075 tok/s
+Iter  8730/10000 | Loss: 2.3290 | Time: 638.9s | Speed: 534845 tok/s
+Iter  8740/10000 | Loss: 2.2841 | Time: 639.5s | Speed: 538746 tok/s
+Iter  8750/10000 | Loss: 2.3147 | Time: 640.1s | Speed: 535041 tok/s
+
+[VALIDATION] Iter 8750: Loss 2.3095
+
+Iter  8760/10000 | Loss: 2.2645 | Time: 643.0s | Speed: 114564 tok/s
+Iter  8770/10000 | Loss: 2.3109 | Time: 643.6s | Speed: 538705 tok/s
+Iter  8780/10000 | Loss: 2.2902 | Time: 644.2s | Speed: 535539 tok/s
+Iter  8790/10000 | Loss: 2.3031 | Time: 644.8s | Speed: 538158 tok/s
+Iter  8800/10000 | Loss: 2.2785 | Time: 645.4s | Speed: 535065 tok/s
+Iter  8810/10000 | Loss: 2.2748 | Time: 646.1s | Speed: 535935 tok/s
+Iter  8820/10000 | Loss: 2.3369 | Time: 646.7s | Speed: 536002 tok/s
+Iter  8830/10000 | Loss: 2.2901 | Time: 647.3s | Speed: 536329 tok/s
+Iter  8840/10000 | Loss: 2.2606 | Time: 647.9s | Speed: 537668 tok/s
+Iter  8850/10000 | Loss: 2.3241 | Time: 648.5s | Speed: 534891 tok/s
+Iter  8860/10000 | Loss: 2.3047 | Time: 649.1s | Speed: 538155 tok/s
+Iter  8870/10000 | Loss: 2.3418 | Time: 649.7s | Speed: 535151 tok/s
+Iter  8880/10000 | Loss: 2.2849 | Time: 650.3s | Speed: 537997 tok/s
+Iter  8890/10000 | Loss: 2.3100 | Time: 650.9s | Speed: 535749 tok/s
+Iter  8900/10000 | Loss: 2.3563 | Time: 651.6s | Speed: 537859 tok/s
+Iter  8910/10000 | Loss: 2.2803 | Time: 652.2s | Speed: 535243 tok/s
+Iter  8920/10000 | Loss: 2.3406 | Time: 652.8s | Speed: 538530 tok/s
+Iter  8930/10000 | Loss: 2.2915 | Time: 653.4s | Speed: 535317 tok/s
+Iter  8940/10000 | Loss: 2.3027 | Time: 654.0s | Speed: 539077 tok/s
+Iter  8950/10000 | Loss: 2.2826 | Time: 654.6s | Speed: 535640 tok/s
+Iter  8960/10000 | Loss: 2.2977 | Time: 655.2s | Speed: 537483 tok/s
+Iter  8970/10000 | Loss: 2.2442 | Time: 655.8s | Speed: 535689 tok/s
+Iter  8980/10000 | Loss: 2.2727 | Time: 656.4s | Speed: 536790 tok/s
+Iter  8990/10000 | Loss: 2.3239 | Time: 657.0s | Speed: 536392 tok/s
+Iter  9000/10000 | Loss: 2.3071 | Time: 657.7s | Speed: 536487 tok/s
+
+[VALIDATION] Iter 9000: Loss 2.2991
+
+Saving rolling checkpoint to out/ckpt_latest.pt...
+Saving checkpoint to out/ckpt_latest.pt...
+Iter  9010/10000 | Loss: 2.3337 | Time: 661.6s | Speed: 83952 tok/s
+Iter  9020/10000 | Loss: 2.2608 | Time: 662.2s | Speed: 538545 tok/s
+Iter  9030/10000 | Loss: 2.2593 | Time: 662.8s | Speed: 535313 tok/s
+Iter  9040/10000 | Loss: 2.3420 | Time: 663.4s | Speed: 539524 tok/s
+Iter  9050/10000 | Loss: 2.3296 | Time: 664.0s | Speed: 535562 tok/s
+Iter  9060/10000 | Loss: 2.3341 | Time: 664.6s | Speed: 538845 tok/s
+Iter  9070/10000 | Loss: 2.3283 | Time: 665.2s | Speed: 535649 tok/s
+Iter  9080/10000 | Loss: 2.3336 | Time: 665.8s | Speed: 538678 tok/s
+Iter  9090/10000 | Loss: 2.3060 | Time: 666.4s | Speed: 536536 tok/s
+Iter  9100/10000 | Loss: 2.3552 | Time: 667.1s | Speed: 537231 tok/s
+Iter  9110/10000 | Loss: 2.3633 | Time: 667.7s | Speed: 535019 tok/s
+Iter  9120/10000 | Loss: 2.2611 | Time: 668.3s | Speed: 538382 tok/s
+Iter  9130/10000 | Loss: 2.3533 | Time: 668.9s | Speed: 534958 tok/s
+Iter  9140/10000 | Loss: 2.3395 | Time: 669.5s | Speed: 538761 tok/s
+Iter  9150/10000 | Loss: 2.2543 | Time: 670.1s | Speed: 534012 tok/s
+Iter  9160/10000 | Loss: 2.3105 | Time: 670.7s | Speed: 537872 tok/s
+Iter  9170/10000 | Loss: 2.2324 | Time: 671.3s | Speed: 536094 tok/s
+Iter  9180/10000 | Loss: 2.2095 | Time: 671.9s | Speed: 538661 tok/s
+Iter  9190/10000 | Loss: 2.3172 | Time: 672.5s | Speed: 536092 tok/s
+Iter  9200/10000 | Loss: 2.2850 | Time: 673.2s | Speed: 538622 tok/s
+Iter  9210/10000 | Loss: 2.3334 | Time: 673.8s | Speed: 535779 tok/s
+Iter  9220/10000 | Loss: 2.2489 | Time: 674.4s | Speed: 538471 tok/s
+Iter  9230/10000 | Loss: 2.3164 | Time: 675.0s | Speed: 535485 tok/s
+Iter  9240/10000 | Loss: 2.3020 | Time: 675.6s | Speed: 537530 tok/s
+Iter  9250/10000 | Loss: 2.2914 | Time: 676.2s | Speed: 536195 tok/s
+
+[VALIDATION] Iter 9250: Loss 2.2900
+
+Iter  9260/10000 | Loss: 2.3331 | Time: 679.1s | Speed: 114609 tok/s
+Iter  9270/10000 | Loss: 2.2882 | Time: 679.7s | Speed: 538024 tok/s
+Iter  9280/10000 | Loss: 2.3306 | Time: 680.3s | Speed: 536220 tok/s
+Iter  9290/10000 | Loss: 2.2997 | Time: 680.9s | Speed: 538527 tok/s
+Iter  9300/10000 | Loss: 2.2976 | Time: 681.5s | Speed: 535926 tok/s
+Iter  9310/10000 | Loss: 2.3097 | Time: 682.1s | Speed: 537060 tok/s
+Iter  9320/10000 | Loss: 2.2914 | Time: 682.7s | Speed: 536615 tok/s
+Iter  9330/10000 | Loss: 2.2380 | Time: 683.3s | Speed: 538179 tok/s
+Iter  9340/10000 | Loss: 2.2623 | Time: 683.9s | Speed: 536340 tok/s
+Iter  9350/10000 | Loss: 2.2672 | Time: 684.6s | Speed: 539517 tok/s
+Iter  9360/10000 | Loss: 2.2946 | Time: 685.2s | Speed: 536140 tok/s
+Iter  9370/10000 | Loss: 2.3519 | Time: 685.8s | Speed: 539484 tok/s
+Iter  9380/10000 | Loss: 2.2976 | Time: 686.4s | Speed: 535252 tok/s
+Iter  9390/10000 | Loss: 2.2698 | Time: 687.0s | Speed: 540425 tok/s
+Iter  9400/10000 | Loss: 2.2771 | Time: 687.6s | Speed: 535539 tok/s
+Iter  9410/10000 | Loss: 2.1975 | Time: 688.2s | Speed: 539758 tok/s
+Iter  9420/10000 | Loss: 2.2212 | Time: 688.8s | Speed: 536140 tok/s
+Iter  9430/10000 | Loss: 2.2738 | Time: 689.4s | Speed: 538202 tok/s
+Iter  9440/10000 | Loss: 2.2666 | Time: 690.0s | Speed: 534480 tok/s
+Iter  9450/10000 | Loss: 2.2718 | Time: 690.7s | Speed: 539673 tok/s
+Iter  9460/10000 | Loss: 2.3620 | Time: 691.3s | Speed: 535153 tok/s
+Iter  9470/10000 | Loss: 2.2029 | Time: 691.9s | Speed: 539788 tok/s
+Iter  9480/10000 | Loss: 2.2587 | Time: 692.5s | Speed: 536349 tok/s
+Iter  9490/10000 | Loss: 2.2430 | Time: 693.1s | Speed: 538067 tok/s
+Iter  9500/10000 | Loss: 2.2766 | Time: 693.7s | Speed: 537643 tok/s
+
+[VALIDATION] Iter 9500: Loss 2.2960
+
+Iter  9510/10000 | Loss: 2.3208 | Time: 696.6s | Speed: 114645 tok/s
+Iter  9520/10000 | Loss: 2.2810 | Time: 697.2s | Speed: 536903 tok/s
+Iter  9530/10000 | Loss: 2.2653 | Time: 697.8s | Speed: 538128 tok/s
+Iter  9540/10000 | Loss: 2.2568 | Time: 698.4s | Speed: 536722 tok/s
+Iter  9550/10000 | Loss: 2.2904 | Time: 699.0s | Speed: 539217 tok/s
+Iter  9560/10000 | Loss: 2.3078 | Time: 699.6s | Speed: 535180 tok/s
+Iter  9570/10000 | Loss: 2.3220 | Time: 700.2s | Speed: 537661 tok/s
+Iter  9580/10000 | Loss: 2.3668 | Time: 700.8s | Speed: 536805 tok/s
+Iter  9590/10000 | Loss: 2.2679 | Time: 701.4s | Speed: 538804 tok/s
+Iter  9600/10000 | Loss: 2.2841 | Time: 702.0s | Speed: 536236 tok/s
+Iter  9610/10000 | Loss: 2.3062 | Time: 702.7s | Speed: 538645 tok/s
+Iter  9620/10000 | Loss: 2.3598 | Time: 703.3s | Speed: 535715 tok/s
+Iter  9630/10000 | Loss: 2.2348 | Time: 703.9s | Speed: 539287 tok/s
+Iter  9640/10000 | Loss: 2.2538 | Time: 704.5s | Speed: 535841 tok/s
+Iter  9650/10000 | Loss: 2.3035 | Time: 705.1s | Speed: 539272 tok/s
+Iter  9660/10000 | Loss: 2.3077 | Time: 705.7s | Speed: 535880 tok/s
+Iter  9670/10000 | Loss: 2.3329 | Time: 706.3s | Speed: 539312 tok/s
+Iter  9680/10000 | Loss: 2.2828 | Time: 706.9s | Speed: 534880 tok/s
+Iter  9690/10000 | Loss: 2.3412 | Time: 707.5s | Speed: 538652 tok/s
+Iter  9700/10000 | Loss: 2.2754 | Time: 708.1s | Speed: 535885 tok/s
+Iter  9710/10000 | Loss: 2.3199 | Time: 708.8s | Speed: 539986 tok/s
+Iter  9720/10000 | Loss: 2.2404 | Time: 709.4s | Speed: 536289 tok/s
+Iter  9730/10000 | Loss: 2.2875 | Time: 710.0s | Speed: 539023 tok/s
+Iter  9740/10000 | Loss: 2.3546 | Time: 710.6s | Speed: 536742 tok/s
+Iter  9750/10000 | Loss: 2.2757 | Time: 711.2s | Speed: 538346 tok/s
+
+[VALIDATION] Iter 9750: Loss 2.2885
+
+Iter  9760/10000 | Loss: 2.2967 | Time: 714.0s | Speed: 114633 tok/s
+Iter  9770/10000 | Loss: 2.3242 | Time: 714.7s | Speed: 536835 tok/s
+Iter  9780/10000 | Loss: 2.3139 | Time: 715.3s | Speed: 537724 tok/s
+Iter  9790/10000 | Loss: 2.2877 | Time: 715.9s | Speed: 538219 tok/s
+Iter  9800/10000 | Loss: 2.2884 | Time: 716.5s | Speed: 536681 tok/s
+Iter  9810/10000 | Loss: 2.3290 | Time: 717.1s | Speed: 537560 tok/s
+Iter  9820/10000 | Loss: 2.2025 | Time: 717.7s | Speed: 536807 tok/s
+Iter  9830/10000 | Loss: 2.3242 | Time: 718.3s | Speed: 538575 tok/s
+Iter  9840/10000 | Loss: 2.2614 | Time: 718.9s | Speed: 536524 tok/s
+Iter  9850/10000 | Loss: 2.2946 | Time: 719.5s | Speed: 539404 tok/s
+Iter  9860/10000 | Loss: 2.2570 | Time: 720.1s | Speed: 535239 tok/s
+Iter  9870/10000 | Loss: 2.3083 | Time: 720.8s | Speed: 539630 tok/s
+Iter  9880/10000 | Loss: 2.3188 | Time: 721.4s | Speed: 535855 tok/s
+Iter  9890/10000 | Loss: 2.3377 | Time: 722.0s | Speed: 540125 tok/s
+Iter  9900/10000 | Loss: 2.2414 | Time: 722.6s | Speed: 535373 tok/s
+Iter  9910/10000 | Loss: 2.2950 | Time: 723.2s | Speed: 539223 tok/s
+Iter  9920/10000 | Loss: 2.2531 | Time: 723.8s | Speed: 535026 tok/s
+Iter  9930/10000 | Loss: 2.3105 | Time: 724.4s | Speed: 539702 tok/s
+Iter  9940/10000 | Loss: 2.2969 | Time: 725.0s | Speed: 536219 tok/s
+Iter  9950/10000 | Loss: 2.3296 | Time: 725.6s | Speed: 539084 tok/s
+Iter  9960/10000 | Loss: 2.2236 | Time: 726.2s | Speed: 537445 tok/s
+Iter  9970/10000 | Loss: 2.3590 | Time: 726.8s | Speed: 537366 tok/s
+Iter  9980/10000 | Loss: 2.3356 | Time: 727.5s | Speed: 536073 tok/s
+Iter  9990/10000 | Loss: 2.2921 | Time: 728.1s | Speed: 538395 tok/s
+Saving checkpoint to out/ckpt_final.pt...
+Training Complete.
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mbatch-size-128[0m at: [34m[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20251127_204708-zjfnsdz6/logs[0m

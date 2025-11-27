@@ -166,3 +166,7 @@ cython_debug/
 
 .ruff_cache/
 *.zip
+
+# Force include the logs folder and everything inside it
+!logs/
+!logs/**/*
